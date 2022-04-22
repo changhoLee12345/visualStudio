@@ -1,28 +1,23 @@
 // this.
 
-let obj = {};
-
-obj.act = function () {
-    this.value = 'default value';
-
-    function innerAction() {
-        this.value = 'innerAct value';
-        console.log("this.value: " + this.value);
+this.x = 9; // 'this' refers to global 'window' object here in a browser
+const module = {
+    x: 81,
+    getX: function () {
+        return this.x;
     }
+};
 
-    function innerReaction(caller) {
-        caller.value = 'innerReact value';
-        console.log('this.value: ' + this.value);
-        console.log('caller.value: ' + caller.value);
-    }
-    console.log('-----------------')
-    innerAction();
-    console.log('obj this.value: ' + this.value);
+module.getX();
+//  returns 81
 
-    console.log('-----------------')
-    innerReaction(this);
-    console.log('log this.value: ' + this.value)
-}
-obj.act();
-console.log('-----------------')
-console.log('global this.value: ' + this.value);
+const retrieveX = module.getX;
+console.log(retrieveX());
+//  returns 9; the function gets invoked at the global scope
+
+//  Create a new function with 'this' bound to module
+//  New programmers might confuse the
+//  global variable 'x' with module's property 'x'
+const boundGetX = retrieveX.bind(module);
+console.log(boundGetX());
+//  returns 81
