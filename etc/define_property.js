@@ -15,7 +15,6 @@ Object.defineProperty(friend, 'age', {
             this._age = this._age ? this._age : defaltAge;
         } else
             this._age = age;
-
     },
     enumerable: true,
     configurable: true
