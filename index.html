@@ -10,8 +10,16 @@
 </head>
 
 <body>
+  <button onclick="createDOM()">생성.</button>
+
   <h3>git 연습.</h3>
   <h3>변경이 됐습니다.</h3>
+  <script>
+    function createDOM() {
+      // console.log(document.parentElement);
+      document.body.innerHTML += '<h3>Hello</h3>';
+    }
+  </script>
 </body>
 
 </html>
