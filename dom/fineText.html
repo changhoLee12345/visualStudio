@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dom/findText.html</title>
+  <style>
+    #show {
+      width: 300px;
+      height: 300px;
+      background-color: yellow;
+    }
+
+    span {
+      display: inline-block;
+      width: 88px;
+      height: 20px;
+      margin: 2px;
+      padding: 2px;
+      border: 1px red solid;
+    }
+
+    #show>span:nth-child(1) {
+      color: blue;
+    }
+  </style>
+</head>
+
+<body>
+  <input type="text" name="" id="userVal">
+  <div id="show"></div>
+
+  <script>
+    let data =
+      `Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui laborum ipsa officia illo sed magnam rem non dicta, unde praesentium deleniti quidem reiciendis fugit quod suscipit. Perferendis obcaecati magni architecto.`;
+    let dataAry = data.split(' ');
+
+    let attach = document.getElementById('show');
+    dataAry.forEach(function (elem) {
+      let span = document.createElement('span');
+      span.innerHTML = elem;
+      attach.appendChild(span);
+    });
+
+    let user = document.getElementById('userVal');
+    // change 이벤트를 등록.
+    user.addEventListener('change', function () {
+      let spans = document.querySelectorAll('span'); // span 요소를 다 가져옴.
+      // 가져온 span 요소를 각각 사용자입력값과 비교.
+      spans.forEach(function (elem, ind) {
+        console.log(elem, ind);
+        if (elem.innerHTML == user.value) {
+          // document.querySelector(`#show>span:nth-child(${ind+1})`).style.display = 'none';
+          elem.style.display = 'none';
+        }
+      });
+      user.value = '';
+    });
+  </script>
+</body>
+
+</html>
