@@ -34,16 +34,29 @@ data.forEach(function (elem, idx, ary) {
 let changeBtn = document.querySelector('input[type="button"]');
 changeBtn.addEventListener('click', function (e) {
   // 대상찾아오도록.
-  let targetTr = document.querySelectorAll('#list>tr');
-  console.log(targetTr);
-  let sno = document.getElementById('sno').value;
-  let escore = document.getElementById('escore').value;
-  targetTr.forEach(function (tr) {
-    console.log(tr);
-    if (tr.children[0].innerHTML == sno) {
-      tr.children[2].innerHTML = escore; // 영어점수변경.
-    }
-  });
+  // let targetTr = document.querySelectorAll('#list>tr');
+  // console.log(targetTr);
+  // let sno = document.getElementById('sno').value;
+  // let escore = document.getElementById('escore').value;
+  // targetTr.forEach(function (tr) {
+  //   console.log(tr);
+  //   if (tr.children[0].innerHTML == sno) {
+  //     tr.children[2].innerHTML = escore; // 영어점수변경.
+  //   }
+  // });
+
+  let obj = {
+    studNo: 111,
+    studName: 'hong',
+    engScore: 99,
+    korScore: 99
+  }
+  let newTr = makeTr(obj);
+
+  let origTr = document.getElementById('sno_101');
+
+  document.getElementById('list').replaceChild(newTr, origTr);
+
 });
 
 function changeCallBack1(e) {
