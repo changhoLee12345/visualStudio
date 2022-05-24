@@ -76,8 +76,8 @@
       // person.name = name;
       // person.score = score;
       // person.age = age;
-
-      document.getElementById('body').appendChild(makeTr(person));
+      let newTr = makeTr(person);
+      document.getElementById('body').appendChild(newTr);
 
       // 초기화.
       document.forms['frm'].elements['uid'].value = '';
