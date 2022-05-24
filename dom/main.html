@@ -40,14 +40,28 @@
   <script>
     // 페이지가 로딩 된 후에 데이터를 화면에 뿌려주기.
     function init() {
-      let data = [
-                  {id:101, name:'홍길동', score: 80, age: 19},
-                  {id:102, name:'박길동', score: 88, age: 22},
-                  {id:103, name:'김길동', score: 90, age: 27}
-                 ];
+      let data = [{
+          id: 101,
+          name: '홍길동',
+          score: 80,
+          age: 19
+        },
+        {
+          id: 102,
+          name: '박길동',
+          score: 88,
+          age: 22
+        },
+        {
+          id: 103,
+          name: '김길동',
+          score: 90,
+          age: 27
+        }
+      ];
 
       // data 반복적으로 makeTr() => id="body" appendChild();
-      data.forEach(function(person, ind) {
+      data.forEach(function (person, ind) {
         document.getElementById('body').appendChild(makeTr(person));
       });
     }

@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="dom/dom.js"></script>
+
     <script>
         let friends = [{
             name: '라이언',
@@ -21,7 +23,6 @@
             age: 2
         }];
     </script>
-    <script src="date.js"></script>
 </head>
 
 <body>
@@ -39,18 +40,18 @@
             ${friends.map(function(friend) {
                 return `<li> 이름: ${friend.name}, 나이: ${friend.age}</li>`
             }).join('\n')}
-        </ul>`
+            </ul>`
     </script>
 
     <script id="tableliteral">
         `<table border='1'>
-            <thead><tr><th>이름</th><th>나이</th></thead>
+        <thead><tr><th>이름</th><th>나이</th></thead>
             <tbody>
                 ${friends.map(function(friend) {
                     return `<tr><td>${friend.name}</td><td>${friend.age}</td></tr>`;
                 }).join('\n')}
-            </tbody>
-        </table>`;
+                </tbody>
+                </table>`;
     </script>
 </body>
 
