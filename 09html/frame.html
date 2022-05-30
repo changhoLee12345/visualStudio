@@ -1,0 +1,11 @@
+<h3>hello, world</h3>
+<input type="text" name="userid" id="" value="">
+<input type="password" name="password" id="" value="">
+<button type="button" onclick="messageTo()">저장</button>
+<script>
+    function messageTo() {
+        // document.getElementById('message').innerHTML = runframe.firstElementChild.value;
+        // console.log('start');
+        window.parent.postMessage('message call!');
+    }
+</script>
