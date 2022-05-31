@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var promise = false;
+        let prm = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (promise) {
+                    resolve('success');
+                } else {
+                    reject('error');
+                }
+            }, 1500);
+        })
+
+        prm.then(result => console.log(result)) //
+            .catch(error => console.log(error));
+
+        let url = '';
+        fetch(url, {
+            method: 'post',
+            headers: {
+                'Content-type': 'application/x-www-form-urlencoded'
+            },
+            body: 'id=good&pass=1234'
+        })
+    </script>
+</body>
+
+</html>
