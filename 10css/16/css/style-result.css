@@ -63,7 +63,7 @@ footer p {
   font-size:1.2em;
   color:#eee;
   text-align:center;
-   line-height:200px;
+  line-height:200px;
 }
 
 @media all and (min-width:768px) {
