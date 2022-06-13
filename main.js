@@ -1,2 +1,9 @@
 // main.js
-console.log('hello world')
+let john = {
+    name: 'John'
+}
+
+let ary = [john];
+john = null;
+
+console.log(ary[0]);
