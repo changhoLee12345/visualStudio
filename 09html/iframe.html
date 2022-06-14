@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form name="myform" id="myform" method="post" target="runFrame" action="save">
+        <input type="text" name="userid" id="" value="user1">
+        <input type="password" name="password" id="" value="1234">
+        <button type="submit">저장</button>
+    </form>
+    <iframe name="runFrame" id='runFrame' src="./frame.html" frameborder="0">
+        <!-- <input type="text" name="userid" id="" value="">
+        <input type="password" name="password" id="" value="">
+        <button type="button" onclick="messageTo()">저장</button> -->
+    </iframe>
+    <div id="message"></div>
+
+    <div id="clone" style="display: block;">
+        <input type="text" name="userid" id="" value="">
+        <input type="password" name="password" id="" value="">
+        <button type="submit">저장</button>
+    </div>
+    <script>
+        window.addEventListener('message', function (e) {
+            console.log('메시지 ' + e.data);
+        })
+
+        const runframe = document.getElementById('runFrame');
+
+        runframe.addEventListener('load', function (e) {
+            console.log(e.target);
+            let el = document.createElement('p');
+            let text = document.createTextNode('아이프레임 테이지')
+            el.append(text);
+            runframe.contentDocument.body.append(el);
+            console.log(e.target.contentDocument);
+        })
+
+        myform.onsubmit = function (e) {
+            e.preventDefault();
+            // let cloneT = document.getElementById('clone').cloneNode(true);
+            // cloneT.style.display = 'block';
+            // cloneT.lastElementChild.onclick = function (e) {
+            //     window.parent.document.getElementById('message').innerHTML = 'OK!'
+            // }
+
+            // runframe.contentDocument.body.append(cloneT);
+
+        }
+    </script>
+</body>
+
+</html>

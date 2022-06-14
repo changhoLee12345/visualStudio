@@ -6,23 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <script src="05array/iterable.js"></script>
+  <script src="main.js"></script>
 </head>
 
 <body>
-
-  <ul>
-    <li class="first">Apple</li>
-    <li class="second">Banana</li>
-    <li class="third">Cherry</li>
-  </ul>
-
-  <div id="add" style="display: none;">
-
-    <input type="text" name="" id="userName" value="Hong">
-    <input type="text" name="" id="userAge" value="20">
-    <button id="addBtn">추가</button>
-  </div>
 
   <input type="file" name="selectFile" id="selectFile" accept="text/plain" onclick="chooseFile()">
 
@@ -47,6 +34,30 @@
       </tbody>
     </table> -->
   </div>
+
+  <table id="table">
+    <tr>
+      <td>일</td>
+      <td>이</td>
+    </tr>
+    <tr>
+      <td>삼</td>
+      <td>사</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+  </table>
+
+  <script>
+    console.log(table);
+    // '이'가 적힌 td를 가져옴(첫 번째 줄, 두 번째 칸)
+    let td = table.rows[0].cells[1];
+    td.style.backgroundColor = "red"; // 강조
+    table.rows[2].cells[0].style.backgroundColor = 'green';
+    table.rows[2].cells[1].style.backgroundColor = 'blue';
+  </script>
 
 </body>
 
