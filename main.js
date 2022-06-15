@@ -1,9 +1,9 @@
 // main.js
-let john = {
-    name: 'John'
-}
-
-let ary = [john];
-john = null;
-
-console.log(ary[0]);
+// let ryon = apeach = con = '';
+// let arrNames = ['ryon', 'apeach', 'con']
+// let {
+//     ryon,
+//     apeach,
+//     con
+// } = 'family';
+// console.log(ryon);
