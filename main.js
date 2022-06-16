@@ -7,3 +7,5 @@
 //     con
 // } = 'family';
 // console.log(ryon);
+
+console.log(null);
