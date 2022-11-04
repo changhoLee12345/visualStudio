@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+
+</head>
+
+<body>
+
+    <div id="app">
+        <img v-bind:src="myImg" width="200px"><br>
+        <a v-bind:href="myHref">link</a>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                myImg: '../11_images/img1.jpg',
+                myHref: 'https://www.daum.net'
+            }
+        });
+    </script>
+</body>
+
+</html>

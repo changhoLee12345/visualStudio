@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <p> {{count}} </p>
+        <p v-text="myName"></p>
+        <button v-on:click="countUp">counter</button>
+        <button v-on:click="changeName">change</button>
+    </div>
+
+    <script>
+        function init() {
+            let count = 0;
+            return function () {
+                count++;
+                return count;
+            }
+        }
+
+        new Vue({
+            el: "#app",
+            data: {
+                count: 0,
+                myName: 'lee',
+                changeNum: null
+            },
+            methods: {
+                changeName: function () {
+                    let names = ['hong', 'hwang', 'park', 'choi']
+                    if (!this.changeNum) {
+                        this.changeNum = init();
+                    }
+                    this.myName = names[this.changeNum() % names.length];
+                },
+                countUp: function () {
+                    this.count++;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
