@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <iframe id="newFrame" frameborder="0"></iframe>
+    <script>
+        let newDoc = document.implementation.createHTMLDocument(); // html document 생성.
+        let div = document.createElement('div');
+        div.innerHTML = "<span>Sample</span>";
+        newDoc.body.appendChild(div);
+
+        let targetDoc = document.getElementById('newFrame').contentDocument;
+        console.log(targetDoc.documentElement)
+        // document.getElementById('newFrame').appendChild(newDoc);
+        let newNode = targetDoc.importNode(newDoc.documentElement, true);
+        console.log(newNode)
+
+        targetDoc.replaceChild(newNode, targetDoc.documentElement);
+    </script>
+</body>
+
+</html>
