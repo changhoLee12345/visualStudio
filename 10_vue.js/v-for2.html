@@ -7,26 +7,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
-    <style>
-        div#app>div {
-            width: 300px;
-            height: 250px;
-        }
-    </style>
+
 </head>
 
 <body>
+
     <div id="app">
-        <input type="number" v-model="myText">
-        <p v-text="myText + 10"></p>
+        <ul>
+            <li v-for="num in 9">{{key + " * " + num + " = " + num * key}}</li>
+        </ul>
+        <select>
+            <option v-on:change="changeKey(key)" v-for="key in keys">{{key}}</option>
+        </select>
     </div>
+
     <script>
         new Vue({
             el: '#app',
             data: {
-                myText: ''
+                multi: 3,
+                keys: [2, 3, 4, 5, 6, 7, 8, 9],
+                key: 2
+            },
+            methods: {
+                changeKey: function (key) {
+                    this.key = key;
+                }
             }
-        });
+        })
     </script>
 
 </body>

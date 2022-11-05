@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+
+</head>
+
+<body>
+
+    <!-- <div id="app">
+        <label for="">check <input type="checkbox" v-model="myCheck"></label>
+        <p v-if="myCheck">show on</p>
+        <p v-else="myCheck">show off</p>
+    </div> -->
+
+    <label for="chk">check <input type="checkbox" id="chk"> </label>
+    <p id="show">show off</p>
+    <!-- <p id="show">show off</p> -->
+
+    <div id="app">
+        <button v-if="visual" v-on:click="isVisible">show</button>
+    </div>
+
+    <script>
+        document.getElementById('chk').onchange = function () {
+            document.getElementById('show').textContent = this.checked ? 'show on' : 'show off';
+        }
+        new Vue({
+            el: '#app',
+            data: {
+                visual: true
+            },
+            methods: {
+                isVisible: function () {
+                    console.log('is')
+                    this.visual = false;
+                }
+            }
+        });
+        // new Vue({
+        //     el: '#app',
+        //     data: {
+        //         myCheck: false
+        //     }
+        // });
+    </script>
+</body>
+
+</html>

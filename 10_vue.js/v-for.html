@@ -7,24 +7,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
-    <style>
-        div#app>div {
-            width: 300px;
-            height: 250px;
-        }
-    </style>
+
 </head>
 
 <body>
+
     <div id="app">
-        <input type="number" v-model="myText">
-        <p v-text="myText + 10"></p>
+        <ul>
+            <li v-for="(item, idx) in ary">{{item.age}}</li>
+        </ul>
     </div>
+
     <script>
+        let objAry = [{
+            id: 'user1',
+            age: 20
+        }, {
+            id: 'user2',
+            age: 22
+        }, {
+            id: 'user3',
+            age: 33
+        }];
+        let fruits = ['apple', 'banana', 'cherry'];
         new Vue({
             el: '#app',
             data: {
-                myText: ''
+                ary: objAry
             }
         });
     </script>
