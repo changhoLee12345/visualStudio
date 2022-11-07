@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p,
+        input {
+            font-family: monospace;
+        }
+
+        p {
+            white-space: pre;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="myCalc">
+        <p>x <input type="text" class="calc-x-input" value="0"></p>
+        <p>y <input type="text" class="calc-y-input" value="0"></p>
+        <p>--------------------------------</p>
+        <p>= <span class="calc-result"></span></p>
+    </div>
+
+    <script type="text/javascript">
+        (function () {
+            function Calc(xInput, yInput, output) {
+                this.xInput = xInput;
+                this.yInput = yInput;
+                this.output = output;
+            }
+
+            Calc.xName = 'xInput';
+            Calc.yName = 'yInput';
+
+            Calc.prototype = {
+                render: function (result) {
+                    this.output.innerText = String(result);
+                },
+                focus: function () {
+                    this.xInput.focus();
+                }
+            }
+
+            function CalcValue(calc, x, y) {
+                this.calc = calc;
+                this.x = x;
+                this.y = y;
+                this.result = x + y;
+            }
+
+            CalcValue.prototype = {
+                copyWith: function (name, value) {
+                    if (!value)
+                        value = 0;
+
+                    var number = parseFloat(value);
+
+                    if (isNaN(number) || !isFinite(number)) {
+                        return;
+                    }
+
+                    if (name === Calc.xName) {
+                        return new CalcValue(this.calc, number, this.y);
+                    }
+
+                    if (name === Calc.yName) {
+                        return new CalcValue(this.calc, this.x, number);
+                    }
+
+                    return this;
+                },
+                render: function () {
+                    this.calc.render(this.result);
+                }
+            }
+
+            function initCalc(elem) {
+                var calc = new Calc(elem.querySelector('input.calc-x-input') //
+                    , elem.querySelector('input.calc-y-input') //
+                    , elem.querySelector('span.calc-result'));
+
+                var lastValues = new CalcValue(calc, parseFloat(calc.xInput.value), parseFloat(calc.yInput.value));
+
+                var handleCalcEvent = function handleCalcEvent(e) {
+
+                    var newValues = lastValues,
+                        elem = e.target;
+
+                    switch (elem) {
+                        case calc.xInput:
+                            newValues = lastValues.copyWith(Calc.xName, elem.value);
+                            break;
+                        case calc.yInput:
+                            newValues = lastValues.copyWith(Calc.yName, elem.value);
+                            break;
+                    }
+
+                    if (newValues !== lastValues) {
+                        lastValues = newValues;
+                        lastValues.render();
+                    }
+                };
+
+                elem.addEventListener('keyup', handleCalcEvent, false);
+                return lastValues;
+            }
+
+            window.addEventListener('load', function () {
+                var cv = initCalc(document.getElementById('myCalc'));
+                // console.log(cv);
+                cv.render();
+
+            }, false);
+
+        }());
+    </script>
+
+</body>
+
+</html>
