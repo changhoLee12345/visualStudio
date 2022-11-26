@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.13/dist/vue.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+</head>
+<body>
+    <!-- computed 속성 : 프로퍼티의 일종, 프로퍼티를 연산한 값 -->
+    <!-- watch 속성 : 프로퍼티의 변화를 감지해서 필요한 프로세스 진행 -->
+    <div id="app">
+        <input type="number" v-model.number="price"> 원 <br>
+        <input type="number" v-model.number="count"> 개 <br>
+        <p> 합계 : {{ sum }}</p>
+        <p> 부가세 포함 금액 : {{ taxIncluded }} </p>
+        <br>
+        <input v-model="today">
+        {{ today }}
+        <br>
+        <p>감상은 140자 이내로 입력해주세요</p>
+        <p v-bind:style="{ color : computedColor }">
+            남은 글자는 {{ remainig }} 입니다.</p>
+        <textarea v-model="myText" v-bind:disabled="disTextArea"></textarea>
+        <hr>
+        <p v-text="printDate()"></p>
+        <button @click="getDate">날짜</button>
+    </div>
+    <script>
+        new Vue({
+            el : '#app',
+            data : {
+                price : 0,
+                count : 0,
+                myText : ''
+            },
+            computed : {
+                // 산출 프로퍼티 -> data 속성의 프로퍼티에 의존적
+                sum : function(){
+                    return this.price * this.count;
+                },
+                taxIncluded : function(){
+                    return this.sum * 1.1;
+                },
+                today : function(){
+                    return new Date();
+                },
+                computedColor : function(){
+                    let col = 'green';
+
+                    if(this.remainig < 20){
+                        col = 'orange';
+                    }
+
+                    if(this.remainig < 1){
+                        col = 'red';
+                    }
+                    return col;
+                },
+                remainig : function(){
+                    return 140 - this.myText.length;
+                },
+                disTextArea : function(){
+                    let value = false;
+                    if(this.remainig < 1){
+                        value = true;
+                    }
+                    return value;
+                }
+            },
+            methods : {
+                printDate : function(){
+                    return '오늘날짜 : ' + Date.now(); 
+                },
+                getDate : function(){
+                    alert(this.printDate());
+                }
+            }
+        })
+    </script>
+    <div id="app2">
+        <!-- input의 value 속성이 비어있으면 모든 데이터가 보이고 
+                            검색을 하면 해당되는 데이터만 보이도록 -->
+        <input type="text">
+        <ul></ul>
+    </div>
+    <script>
+        let dataList = ['설악산', '한라산', '북한산', '백두산', '지리산'];
+        // input 입력에 따른 변화 -> 이벤트, 이벤트 핸들러를 등록
+        // 입력이 없을 경우 dataList가 전부 목록으로 출력
+        // 한글자라도 입력이 있을 경우 dataList에서 포함되는 값을 분류
+        // 그 분류한 걸 기존의 목록을 대체
+        
+        //---------------------------------- 제이쿼리
+        $(document).ready(function(){
+      
+        init();
+
+        $('#app2 > input:text:eq(0)').on('change', changeData);
+
+        function changeData(){
+            $('#app2 > ul:first').empty();
+
+            let keyword = $('#app2 > input:text:eq(0)').val();
+            if(keyword != ''){
+                $(dataList).each(function(idx, val){
+                if(val.match(keyword)){
+                    $('#app2 > ul:first').append(
+                        $('<li />').text(val)
+                    );
+                    }
+                })
+            }else{
+                init();
+                }
+            }
+
+
+            function init(){
+                $(dataList).each(function(idx, val){
+                    $('#app2 > ul:first').append(
+                        $('<li />').text(val)
+                        );
+                    });
+                }
+            });
+    </script>
+    <div id="app3">
+        <!-- input의 value 속성이 비어있으면 모든 데이터가 보이고 
+                                검색을 하면 해당되는 데이터만 보이도록 -->
+        <input type="text" v-model="findWord">
+        <ul>
+            <li v-for="item in findItems">{{ item }}</li>
+        </ul>
+    </div>
+    <script>
+        new Vue({
+            el : '#app3',
+            data : {
+                findWord : '',
+                items : dataList // 원본데이터
+            },
+            computed : {
+                findItems : function(){
+                    if(this.findWord){
+                        //console.log('computed : ', this);
+                        return this.items.filter(function(value){
+                            //console.log('filter : ', this);
+                            return (value.indexOf(this.findWord) > -1);
+                        }, this);
+                    }else{
+                        return this.items;
+                    }
+                }
+            }
+        })
+    </script>
+    <div id="app4">
+        <p>금지문자 [ {{ forhiddenText }}]</p>
+        <textarea v-model="inputText"></textarea>
+        <br>
+        <br>
+        <p> 앞으로 {{ restSec }}</p>
+        <button v-on:click="startTimer">START</button>
+    </div>
+    <script>
+        new Vue({
+            el : '#app4',
+            data : {
+                forhiddenText : '주말',
+                inputText : '',
+                restSec : 10,
+                timerObj : null
+            },
+            methods : {
+                startTimer : function(){
+                    clearInterval(this.timerObj);
+                    this.restSec = 10;
+                    this.timerObj = setInterval(()=>{ this.restSec--}, 1000);
+                }
+            },
+            watch : {
+                inputText : function(){
+                    let pos = this.inputText.indexOf(this.forhiddenText);
+                    if(pos > -1){
+                        alert(this.forhiddenText + '는 입력할 수 없습니다.');
+                        this.inputText = this.inputText.substr(0, pos);
+                        // 오늘은 주말 -> 오늘은 
+                    }
+                },
+                restSec : function(){
+                    if(this.restSec <= 0){
+                        alert('제한시간입니다');
+                        clearInterval(this.timerObj);
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
