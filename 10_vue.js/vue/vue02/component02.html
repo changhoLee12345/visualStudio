@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.13/dist/vue.js"></script>
+</head>
+
+<body>
+    <!--
+        1. component 하위의 독립된 객체 -> 값을 전달할 때 props 속성을 이용해서 프로퍼티 정의
+        2. 복수로 정의된 프로퍼티일 경우 개별적으로 v-bind 디렉티브를 연결
+        3. 복수로 정의된 프로퍼티들을 필드로 가지는 객체를 v-bind에 값으로 넘겨줌
+        3-1) data 속성에 객체로 정의
+        3-2) computed 속성에 객체를 반환하는 함수로 정의
+        4. v-bind 디렉티브를 연결하지 않은 상태에서 값을 넘길 때는 반드시 문자로 넘어감
+        4-1) 문자를 제외한 자바스크립트 사용하는 타입을 값으로 넘기고 싶을 경우에는 v-bind 디렉티브 연결
+    -->
+    <div id="app">
+        <input v-model="name">
+        <!-- 컴포넌트 추가 예정-->
+        <name-component v-bind:today="200 + 15" v-bind:my-name="name"></name-component>
+        <input v-model="array.myName">
+        <name-component v-bind="dataList"></name-component>
+        <name-component my-name="영희" v-bind:today="100"></name-component>
+        <name-component v-bind:my-name="12.5"></name-component>
+    </div>
+    <script>
+        const component = {
+            template: `<p>{{ today + 1 }}, 나는 {{ myName }} 입니다.</p>`,
+            /*
+            props : ['today', 'myName'], // 외부에서 값을 받아오는 프로퍼티
+            created : function(){
+                if( this.myName == null || this.myName == 0){
+                    this.myName = '무명';
+                }
+                if( this.today == null || this.today == 0 ){
+                    this.today = -1;
+                }
+            }
+            */
+            props: {
+                myName: String,
+                today: {
+                    type: Number,
+                    default: -1
+                }
+            }
+        }
+
+        new Vue({
+            el: '#app',
+            data: {
+                name: '',
+                array: {
+                    myName: '',
+                    today: 205
+                }
+            },
+            computed: {
+                dataList: function () {
+                    return {
+                        myName: this.name,
+                        today: Date.now()
+                    }
+                }
+            },
+            components: {
+                'name-component': component
+            }
+        })
+    </script>
+    <hr>
+    <div id="app2">
+        <p>{{ count }}</p>
+        <button v-on:click="countUp">증가</button>
+        <count-component v-bind:my-count.sync="count"></count-component>
+        <!-- v-bind:my-count="count" v-on:update:my-couter="val => bar=val"  -->
+    </div>
+    <script>
+        const countComponent = {
+            template: `<div>
+                            <p> {{ myCount }} </p>
+                            <button v-on:click="myCountUp">자식증가</button>
+                        </div>`,
+            props: ['myCount'],
+            methods: {
+                myCountUp: function () {
+                    this.myCount++;
+                    this.$emit('update:myCount', this.myCount);
+                }
+            }
+        }
+        new Vue({
+            el: '#app2',
+            data: {
+                count: 0
+            },
+            methods: {
+                countUp: function () {
+                    this.count++;
+                }
+            },
+            components: {
+                countComponent // countComponent : countComponent 
+                //-> 'count-component' : countComponent 
+            }
+        })
+    </script>
+    <div id="app3">
+        <p>{{ counter }}</p>
+        <button v-on:click="incrementCounter">카운터 증가</button>
+        <button-component v-on:increment-me="incrementCounter"></button-component>
+        <count-component v-on:count-up="incrementCounter"></count-component>
+    </div>
+    <script>
+        //$on -> 컴포넌트 간에 이벤트를 수신하는 경우
+        //$emit -> event를 발생 ( 상위 컴포넌트에 메세지를 보내는 경우 )  
+        const btnComponent = {
+            template: `<div>
+                            <button v-on:click="childIncrementCounter()">
+                                자식으로부터 증가</button>
+                        </div>`,
+            methods: {
+                childIncrementCounter: function () {
+                    this.$emit('increment-me');
+                }
+            }
+        }
+
+        const counterComponent = {
+            template: `<div>
+                            <input v-model="counter">
+                            <button v-on:click="counting"> {{ counter }}</button>
+                        </div>`,
+            data: function () {
+                return {
+                    counter: 0
+                }
+            },
+            methods: {
+                counting: function () {
+                    this.counter++;
+                }
+            },
+            watch: {
+                counter: function () {
+                    this.$emit('count-up');
+                }
+            }
+        }
+
+        new Vue({
+            el: '#app3',
+            data: {
+                counter: 0
+            },
+            methods: {
+                incrementCounter: function () {
+                    this.counter++;
+                }
+            },
+            components: {
+                'button-component': btnComponent,
+                'count-component': counterComponent
+            }
+        })
+    </script>
+</body>
+
+</html>

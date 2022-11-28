@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.13/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <label><input type="checkbox" v-model="myVisible">표시</label>
+        <p v-if="myVisible" id="test">체크박스가 ON</p>
+        <p>새로운 P 태그</p>
+        <p v-else>체크박스 OFF</p>
+        <br>
+        <br>
+        <p v-if=" type == 'A' ">A</p>
+        <p v-else-if=" type == 'B' ">B</p>
+        <p v-else-if=" type == 'C' ">C</p>
+        <p v-else>기타 : {{ type }}</p>
+        <input v-model="type">
+        <br>
+        <br>
+        <button v-show="isShow" v-on:click="isShow = false">선택</button>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                myVisible: false,
+                type: '',
+                isShow: true
+            }
+        })
+    </script>
+</body>
+
+</html>
