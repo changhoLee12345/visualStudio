@@ -26,7 +26,6 @@
 
         function drawChart() {
 
-
             var data = google.visualization.arrayToDataTable(origData);
 
             var options = {
@@ -44,8 +43,8 @@
 <body>
 
     <div id="piechart" style="width: 900px; height: 500px;"></div>
-    <ul id="list">
 
+    <ul id="list">
     </ul>
 
     <script>
@@ -54,7 +53,7 @@
         origData.forEach((item, idx, ary) => {
             if (idx) {
                 let li = document.createElement('li');
-                let txt = document.createTextNode(item);
+                let txt = document.createTextNode(item[0] + ' ');
                 let btn = document.createElement('button');
                 btn.addEventListener('click', function () {
                     item[1]++;

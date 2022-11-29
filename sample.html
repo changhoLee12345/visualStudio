@@ -18,6 +18,18 @@
             color: white;
             font-weight: bold;
         }
+
+        td {
+            display: inline-block;
+            width: 30px;
+            padding: 1px 2px;
+        }
+
+        tr>td:not(::content()){
+            width: 30px;
+            display: inline-block;
+            padding: 12px 10px;
+        }
     </style>
 </head>
 
@@ -27,7 +39,46 @@
     <div id="show" clsss="show">hello</div>
 
     <script>
-        console.log(show.textContent)
+        let str = "<table border=1>";
+        str += "<tbody><tr>";
+        let cnt = 1,
+            init = 1;
+        for (let i = 1; i <= 25; i++) {
+            str += "<td>" + cnt + "</td>";
+            cnt = cnt + 5;
+            if (i % 5 == 0) {
+                cnt = ++init;
+                str += "</tr><tr>";
+            }
+        }
+        str += "</tbody></table>";
+
+        str = "<table border=1>";
+        for (let i = 1; i <= 9; i++) {
+            str += "<tr>";
+            for (let j = 2; j <= 5; j++) {
+                str += `<td>${j}</td><td>*</td><td>${i}</td><td>=</td><td>${j*i}</td><td></td>`;
+            }
+            str += "</tr>";
+        }
+        document.write(str);
+
+        cnt = 1;
+        str = "<table border=1>";
+        for (let i = 1; i <= 5; i++) {
+            str += "<tr>";
+            for (let j = 1; j <= 5; j++) {
+                if (j <= i) {
+                    str += "<td>" + cnt + "</td>";
+                } else {
+                    str += "<td></td>";
+                }
+                cnt++;
+            }
+            str += "</tr>";
+        }
+        str += "</table>";
+        document.write(str);
     </script>
 
 </body>
