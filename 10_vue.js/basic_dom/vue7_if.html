@@ -25,6 +25,19 @@
         })
         app.$data.id = 3;
     </script>
+
+    <div id="show">
+        show=><div v-show="useLoc">Korea</div>
+        <div>after show</div>
+    </div>
+    <script>
+        var show = new Vue({
+            el: '#show',
+            data: {
+                useLoc: false
+            }
+        })
+    </script>
 </body>
 
 </html>
