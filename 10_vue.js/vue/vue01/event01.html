@@ -10,7 +10,7 @@
 </head>
 <style>
     .tag {
-        margin: 10px;
+        margin: 20px;
         border: 1px solid gray;
     }
 </style>
@@ -69,7 +69,7 @@
         })
     </script>
 
-    <div id="app2" v-bind:class="style">
+    <div id="app2" v-bind:class="style" @click="printMessage('outer div')">
         <form action="http://www.naver.com" :class="style" @click="printMessage('form 태그 선택')" v-on:submit.prevent>
             <div v-bind:class="style" v-on:click.stop="printMessage('div 태그 선택')">
                 <p v-bind:class="style" @click.self.once="printMessage('p 태그 선택')">
