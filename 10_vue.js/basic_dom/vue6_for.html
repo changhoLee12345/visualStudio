@@ -13,7 +13,7 @@
 <body>
     <div id="app">
         <ul>
-            <li v-for="n in list" v-text="n"></li>
+            <li v-for="(n, idx) in list">{{idx}} => {{n}}</li>
         </ul>
         <table>
             <tbody>
@@ -45,11 +45,12 @@
 
     <div id="show">
         <ul>
-            <li v-for="(val, key) in object">{{key}}: {{val}}</li>
+            <li v-for="(val, key, idx) in object">{{idx}}=>{{key}}: {{val}}</li>
         </ul>
-        <!-- <span v-for="n in 10">{{n }} </span> -->
+        <span v-for="n in 10">{{n }} </span>
         <dl>
-            <template v-for="fruit in fruits"> <!-- template태그는 처리후 소멸. -->
+            <template v-for="fruit in fruits">
+                <!-- template태그는 처리후 소멸. -->
                 <dt>{{fruit.name}}</dt>
                 <dd>{{fruit.price}}</dd>
             </template>
