@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,76 +11,69 @@
 <style>
     .tag {
         margin: 10px;
-        border : 1px solid gray;
+        border: 1px solid gray;
     }
 </style>
+
 <body>
     <!-- v-on 디렉티브 : 이벤트 등록하는 디렉티브, 
         Vue 인스턴스 안에 등록된 methods에 정의한 함수만 핸들러로 사용가능 -->
-   <button onclick="alert('체크')">체크</button>
-   <div id="app">
-    <p>{{ count }}</p>
-    <button v-on:click="countUp">1씩 증가</button>
-    <button v-on:click="oneClick" v-bind:disabled="isClick">One Clcik</button>
-    <hr>
-    <label>증가 숫자 : <input v-model.number="myNum" type="number"></label>
-    <button v-on:click="countUp2(myNum)">{{myNum}}씩 증가</button>
-   </div>
-   <script>
-    new Vue({
-        el : '#app',
-        data : {
-            count : 0,
-            isClick : false,
-            myNum : 0
-        },
-        methods : {
-            countUp : function(){
-                this.count++;
+    <button onclick="alert('체크')">체크</button>
+    <div id="app">
+        <p>{{ count }}</p>
+        <button v-on:click="countUp">1씩 증가</button>
+        <button v-on:click="oneClick" v-bind:disabled="isClick">One Clcik</button>
+        <hr>
+        <label>증가 숫자 : <input v-model.number="myNum" type="number"></label>
+        <button v-on:click="countUp2(myNum)">{{myNum}}씩 증가</button>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                count: 0,
+                isClick: false,
+                myNum: 0
             },
-            oneClick : function(){
-                alert('더이상 진행할 수 없습니다.');
-                this.isClick = true;
-            },
-            countUp2 : function(num){
-                this.count += num;
-            }
-        }
-    })
-   </script>
-   <a id="btn" href="https://www.naver.com" 
-        v-on:click="warn('Form cannot be submitted yet', $event)">
-    Submit
-   </a>
-   <script>
-    new Vue({
-        el : '#btn',
-        methods : {
-            warn : function(message, event){
-                if(event){
-                    console.log(event.target);
-                    console.log(event.currentTarget);
-                    console.log(event);
-
-                    event.preventDefault();
+            methods: {
+                countUp: function () {
+                    this.count++;
+                },
+                oneClick: function () {
+                    alert('더이상 진행할 수 없습니다.');
+                    this.isClick = true;
+                },
+                countUp2: function (num) {
+                    this.count += num;
                 }
-                alert(message);
             }
-        }
-    })
-   </script>
-   <div id="app2" v-bind:class="style">
-        <form action="http://www.naver.com"
-            :class="style"
-            @click="printMessage('form 태그 선택')"
-            v-on:submit.prevent >
-            <div v-bind:class="style"
-                v-on:click.stop="printMessage('div 태그 선택')">                
-                <p v-bind:class="style"
-                    @click.self.once="printMessage('p 태그 선택')">
-                    <a v-bind:class="style"
-                        href="http:www.google.com"
-                        v-on:click.prevent="printMessage('a 태그 선택')">
+        })
+    </script>
+
+    <a id="btn" href="https://www.naver.com" v-on:click="warn('Form cannot be submitted yet', $event)"> Submit </a>
+    <script>
+        new Vue({
+            el: '#btn',
+            methods: {
+                warn: function (message, event) {
+                    if (event) {
+                        console.log(event.target);
+                        console.log(event.currentTarget);
+                        console.log(event);
+
+                        event.preventDefault();
+                    }
+                    alert(message);
+                }
+            }
+        })
+    </script>
+
+    <div id="app2" v-bind:class="style">
+        <form action="http://www.naver.com" :class="style" @click="printMessage('form 태그 선택')" v-on:submit.prevent>
+            <div v-bind:class="style" v-on:click.stop="printMessage('div 태그 선택')">
+                <p v-bind:class="style" @click.self.once="printMessage('p 태그 선택')">
+                    <a v-bind:class="style" href="http:www.google.com" v-on:click.prevent="printMessage('a 태그 선택')">
                         구글
                     </a>
                     {{ message }}
@@ -90,40 +84,41 @@
             <span @click="changeMessage($event), alertExcute()">
                 이벤트 핸들러 복수 실행</span>
         </div>
-   </div>
-   <script>
-    // 이벤트 수식어 -> on 디렉티브에 연결되는 이벤트 동작을 제어
-    // .stop : 이벤트 버블링(이벤트 전파)를 차단
-    // .prevent : 기본 이벤트 핸들러를 중지
-    // .self : Event 객체의 target == currentTarget인 경우에만 이벤트 핸들러 동작
-    // .once : 최대 한번만 동작
+    </div>
+    <script>
+        // 이벤트 수식어 -> on 디렉티브에 연결되는 이벤트 동작을 제어
+        // .stop : 이벤트 버블링(이벤트 전파)를 차단
+        // .prevent : 기본 이벤트 핸들러를 중지
+        // .self : Event 객체의 target == currentTarget인 경우에만 이벤트 핸들러 동작
+        // .once : 최대 한번만 동작
 
-    // .capture : 이벤트 캡처링 중단
-    // .passive : wheel 이벤트 동작 시 실제 화면에서 스크롤된 것과 로직을 분리
+        // .capture : 이벤트 캡처링 중단
+        // .passive : wheel 이벤트 동작 시 실제 화면에서 스크롤된 것과 로직을 분리
 
-    new Vue({
-        el : '#app2',
-        data : {
-            style : 'tag',
-            message : ''
-        },
-        methods : {
-            printMessage : function(message){
-                this.message = message;
-                alert(message);
+        new Vue({
+            el: '#app2',
+            data: {
+                style: 'tag',
+                message: ''
             },
-            changeMessage : function(event){
-                if(event){
-                    console.log(event.target); //최초로 이벤트가 발생한 대상
-                    console.log(event.currentTarget);   //현재 이벤트관련 핸들러를 실행하는 대상
-                    this.message = "이벤트 실행 target : " + event.target;
-                } 
-            },
-            alertExcute : function(){
-                alert('이벤트 핸들로 복수 등록');
+            methods: {
+                printMessage: function (message) {
+                    this.message = message;
+                    alert(message);
+                },
+                changeMessage: function (event) {
+                    if (event) {
+                        console.log(event.target); //최초로 이벤트가 발생한 대상
+                        console.log(event.currentTarget); //현재 이벤트관련 핸들러를 실행하는 대상
+                        this.message = "이벤트 실행 target : " + event.target;
+                    }
+                },
+                alertExcute: function () {
+                    alert('이벤트 핸들로 복수 등록');
+                }
             }
-        }
-    })
-   </script>
+        })
+    </script>
 </body>
+
 </html>
