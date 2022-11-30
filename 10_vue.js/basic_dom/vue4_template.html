@@ -38,7 +38,7 @@
             }
         })
 
-        vm.msg = "new value";
+        // vm.msg = "new value";
     </script>
 
     <div id="world">
@@ -51,15 +51,16 @@
         var world = new Vue({
             el: '#world',
             data: {
-                msg: 'hello',
+                msg: 'hello title',
                 dir: 'lt'
             }
         })
         world.msg = 'new hello';
     </script>
 
+    <!-- 컴포넌트 설명인데 여기서는 하지말자. -->
     <div id="app">
-        <last-feed v-once :comment="msg"></last-feed>
+        <last-feed v-bind:comment="msg"></last-feed>
     </div>
     <script>
         var app = new Vue({
@@ -77,17 +78,21 @@
     </script>
 
     <div id="forloop">
+        &lt;text&gt;:<p v-text="msg"></p>
+        &lt;html&gt;:<p v-html="msg"></p>
         <ul>
-            <li v-for="i in list" v-once>{{i}}</li>
+            <li v-for="i in list" >{{i}}</li>
         </ul>
     </div>
     <script>
         var forloop = new Vue({
             el: '#forloop',
             data: {
+                msg: '<b>Hello,World</b>',
                 list: [1, 2, 3, 4]
             }
         })
+        forloop._data.list.push(5)
     </script>
 </body>
 
