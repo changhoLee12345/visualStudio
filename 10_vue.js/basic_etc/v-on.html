@@ -48,6 +48,25 @@
             }
         })
     </script>
+
+    <div id="test">
+        <p>{{msg}}</p>
+        <button v-on:click="changeMsg">change</button>
+    </div>
+    <script>
+        var test = new Vue({
+            el: '#test',
+            data: {
+                msg: 0
+            },
+            methods: {
+                changeMsg: function () {
+                    this.message = 0;
+                    console.log(++this.message)
+                }
+            }
+        })
+    </script>
 </body>
 
 </html>
