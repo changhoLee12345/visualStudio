@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p v-bind:id="p_id" v-bind:class="your_class">{{hello}}</p>
+        <p>살고 있는 곳은 <strong>{{live_city}}</strong> 이군요!!</p>
+        <input type="text" v-model="live_city">
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                hello: 'hello, world',
+                live_city: '',
+                p_id: 'p_tag_id',
+                your_class: 'table'
+            }
+        })
+    </script>
+</body>
+
+</html>
