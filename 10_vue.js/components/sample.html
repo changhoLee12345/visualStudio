@@ -11,19 +11,22 @@
 
 <body>
     <div id="app">
-        <p v-bind:id="p_id" v-bind:class="your_class">{{hello}}</p>
-        <p>살고 있는 곳은 <strong>{{live_city}}</strong> 이군요!!</p>
-        <input type="text" v-model="live_city">
+        <div v-for="item in items" v-bind:key="item.id">
+            <span>{{item.title}}</span>
+        </div>
     </div>
 
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
-                hello: 'hello, world',
-                live_city: '',
-                p_id: 'p_tag_id',
-                your_class: 'table'
+                items: [{
+                    id: 1,
+                    title: 'Vue.js'
+                }, {
+                    id: 2,
+                    title: 'React.js'
+                }]
             }
         })
     </script>
