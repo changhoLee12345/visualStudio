@@ -21,49 +21,55 @@ let template = `
 
 export default {
     template,
-    props : ['empId'],
-    data : function(){
+    props: ['empId'],
+    data: function () {
         return {
-            infos : ['employee_id', 'first_name', 'last_name', 'email', 'job_id'],
-            empInfo : {}
+            infos: ['employee_id', 'first_name', 'last_name', 'email', 'job_id'],
+            empInfo: {}
         }
     },
-    created : function(){
+    created: function () {
 
         const vueObject = this;
 
         $.ajax({
-            url : 'http://192.168.0.2:8081/myserver/empFind',
-            type : 'get',
-            data : { employee_id : vueObject.empId },
-            dataType : 'json',
-            success : function(data){
-                if(data != null){
+            url: 'http://192.168.0.2:8081/myserver/empFind',
+            type: 'get',
+            data: {
+                employee_id: vueObject.empId
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data != null) {
                     vueObject.empInfo = data;
                 }
             },
-            error : function(reject){
+            error: function (reject) {
                 console.log(reject);
             }
         })
     },
-    methods : {
-        deleteData : function(){
+    methods: {
+        deleteData: function () {
             const vueObject = this;
 
             $.ajax({
-                url : 'http://192.168.0.2:8081/myserver/empDelete',
-                type : 'post',
-                data : { employee_id : vueObject.empId },
-                dataType : 'json',
-                success : function(data){
-                    if(data != null){
-                        vueObject.$router.push({ name : 'empSelect'});
-                    }else{
+                url: 'http://192.168.0.2:8081/myserver/empDelete',
+                type: 'post',
+                data: {
+                    employee_id: vueObject.empId
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data != null) {
+                        vueObject.$router.push({
+                            name: 'empSelect'
+                        });
+                    } else {
                         alert("정상적으로 삭제되지 않았습니다.");
                     }
                 },
-                error : function(reject){
+                error: function (reject) {
                     console.log(reject);
                 }
             })

@@ -20,30 +20,32 @@ let template = `
 
 const empSelect = {
     template,
-    data : function(){
+    data: function () {
         return {
-            headerInfo : ['employee_id', 'first_name', 'last_name', 'email', 'job_id'],
-            empList : []
+            headerInfo: ['employee_id', 'first_name', 'last_name', 'email', 'job_id'],
+            empList: []
         }
     },
-    created : function(){
+    created: function () {
         const vueObject = this; // vue 나 component 객체
-        
+
         $.ajax({
             // this -> jQuery 객체
-            url : 'http://192.168.0.2:8081/myserver/empSelect',
-            type : 'get',
-            dataType : 'json',
-            success : function(data){
-                if(data != null){
+            url: 'http://192.168.0.2:8081/myserver/empSelect',
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                if (data != null) {
                     vueObject.empList = data;
                 }
             },
-            error : function(reject){
+            error: function (reject) {
                 console.log(reject);
             }
         })
     }
 }
 
-export { empSelect }
+export {
+    empSelect
+}

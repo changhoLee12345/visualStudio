@@ -9,5 +9,5 @@ let template = `
 </nav>`
 
 export default {
-    template // template : template
+  template // template : template
 }
