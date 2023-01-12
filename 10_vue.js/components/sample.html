@@ -11,19 +11,18 @@
 
 <body>
     <div id="app">
-        <p v-bind:id="p_id" v-bind:class="your_class">{{hello}}</p>
-        <p>살고 있는 곳은 <strong>{{live_city}}</strong> 이군요!!</p>
-        <input type="text" v-model="live_city">
+        <form action="/search" method="post">
+            <label for="" id="text_search">검색어</label>
+            <input type="text" v-model="search_word" id="search_word">
+            <input type="submit" value="착지">
+        </form>
     </div>
 
     <script>
         var vm = new Vue({
-            el: '#app',
+            el: 'div#app',
             data: {
-                hello: 'hello, world',
-                live_city: '',
-                p_id: 'p_tag_id',
-                your_class: 'table'
+                search_word: ''
             }
         })
     </script>

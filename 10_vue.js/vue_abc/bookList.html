@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2"></script>
+    <script src="https://unpkg.com/axios"></script>
+    <script src="https://unpkg.com/es6-promise"></script>
+</head>
+
+<body>
+
+    <form name="myfrm" action="">
+        <table class="table">
+            <tr>
+                <th>도서코드</th>
+                <td><input type="text" name="" id=""></td>
+            </tr>
+            <tr>
+                <th>도서명</th>
+                <td><input type="text" name="" id=""></td>
+            </tr>
+            <tr>
+                <th>저자</th>
+                <td><input type="text" name="" id=""></td>
+            </tr>
+            <tr>
+                <th>출판사</th>
+                <td><input type="text" name="" id=""></td>
+            </tr>
+            <tr>
+                <th>가격</th>
+                <td><input type="text" name="" id=""></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="save">
+                    <input type="reset" value="reset">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>도서코드</th>
+                <th>도서명</th>
+                <th>저자</th>
+                <th>출판사</th>
+                <th>가격</th>
+            </tr>
+        </thead>
+        <tbody id="list"></tbody>
+    </table>
+
+    <script>
+        let fields = ['bookCode', 'bookTitle', 'bookAuthor', 'bookPress', 'bookPrice']
+        let bookList = document.querySelector('#list');
+
+        function makeRow(obj = {}) {
+
+            let tr = document.createElement('tr')
+            fields.forEach(item => {
+                let td = document.createElement('td')
+                td.innerText = obj[item]
+                tr.append(td)
+            })
+            return tr;
+
+        }
+
+        fetch('http://localhost:8080/HelloApp/bookListJson.do')
+            .then(resolve => resolve.json())
+            .then(result => {
+                console.log(result);
+                result.forEach(book => {
+                    bookList.append(makeRow(book))
+                })
+            })
+            .catch(reject => {
+                console.log(reject)
+            })
+
+        document.querySelector('[name=myfrm]').addEventListener('submit', function () {
+            axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+            axios({
+                url: 'http://localhost:8080/HelloApp/addBookJson.do',
+                method: 'post',
+                data: {
+                    bookCode: 'B0009',
+                    bookTitle: 'Title0002',
+                    bookAuthor: 'Author0002',
+                    bookPress: 'Press0002',
+                    bookPrice: 20002
+                }
+            }).then(response => {
+                console.log(response)
+            }).catch(ex => {
+                console.log(ex)
+            })
+
+        })
+
+        var vm = new Vue({
+
+        });
+        console.log(vm);
+    </script>
+
+</body>
+
+</html>
