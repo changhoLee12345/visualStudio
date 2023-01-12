@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
   <title>Document</title>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
+
 <body>
   <script>
     /*
@@ -19,84 +21,83 @@
          입력 창 아래 입력한 문자의 개수가 표시되며
          금지어를 사용한 횟수 * 12 한 벌점을 출력한다
     */
-   document.addEventListener('DOMContentLoaded', function(){
-    new Vue({
-    el : '#app',
-    data : {
-      forhiddenText : '',   // 금지문자(입력받음) -> ,
-      isWritable : true,    // 태그의 비활성화를 컨트롤
-      limitTime : 0,        // 남은시간 -> watch 속성
-      setTime : 0,          // 제한시간(입력받음)
-      inputText : '',       // 사용자가 입력하는 글자들(입력받음) -> watch 속성
-      timerObj : null,      // setInterval의 반환 값을 저장
-      wordCnt : 0,          // 입력한 최종 문자 수
-      forhiddenCnt : 0      // 금지문자를 입력한 수
-    },
-    methods : {
-      start : function(){   // 시작 버튼의 이벤트 핸들러
-        // 1) 금지문자, 제한시간 input -> 비활성화=true
-        // 2) 남은시간 = 제한시간 -> countDown
-        // 3) textarea -> 비활성화=false
-        this.isWritable = false;
-        this.limitTime = this.setTime;
-        //this.timerObj = setInterval(() => { this.limitTime--; }, 1000);
-        const vueObj = this;
-        this.timerObj = setInterval(function(){
-            console.log(this);
-            vueObj.limitTime--;
-        }, 1000);
-      }
-    },
-    watch : { //감시 
-      limitTime : function(){
-        //감시 이유 => 남은 시간이 0이 될 경우
-        //-1) alert : 제한시간 도달했습니다.
-        //-2) textarea 태그 -> 비활성화=true
-        //-3) 금지문자, 제한시간 input -> 비활성화=false
-        //-4) 최종 입력한 문자 수가 출력
-        if(this.limitTime <= 0){
-            alert('제한시간에 도달했습니다.');
-            clearInterval(this.timerObj);
-            this.isWritable = true;
-            this.wordCnt = this.inputText.length;
-        }
-      },
-      inputText : function(){
-        //감시 이유 => 금지문자 입력유무
-        //-1) 금지문자를 입력한 경우
-        //-1.1) alert : 금지문자를 입력할 수  없습니다.
-        //-1.2) 별점이 올라감
-        //-1.3) 입력된 금지문자가 제외
-        //-1.4) 남은시간 + 10
+    document.addEventListener('DOMContentLoaded', function () {
+      new Vue({
+        el: '#app',
+        data: {
+          forhiddenText: '', // 금지문자(입력받음) -> ,
+          isWritable: true, // 태그의 비활성화를 컨트롤
+          limitTime: 0, // 남은시간 -> watch 속성
+          setTime: 0, // 제한시간(입력받음)
+          inputText: '', // 사용자가 입력하는 글자들(입력받음) -> watch 속성
+          timerObj: null, // setInterval의 반환 값을 저장
+          wordCnt: 0, // 입력한 최종 문자 수
+          forhiddenCnt: 0 // 금지문자를 입력한 수
+        },
+        methods: {
+          start: function () { // 시작 버튼의 이벤트 핸들러
+            // 1) 금지문자, 제한시간 input -> 비활성화=true
+            // 2) 남은시간 = 제한시간 -> countDown
+            // 3) textarea -> 비활성화=false
+            this.isWritable = false;
+            this.limitTime = this.setTime;
+            //this.timerObj = setInterval(() => { this.limitTime--; }, 1000);
+            const vueObj = this;
+            this.timerObj = setInterval(function () {
+              console.log(this);
+              vueObj.limitTime--;
+            }, 1000);
+          }
+        },
+        watch: { //감시 
+          limitTime: function () {
+            //감시 이유 => 남은 시간이 0이 될 경우
+            //-1) alert : 제한시간 도달했습니다.
+            //-2) textarea 태그 -> 비활성화=true
+            //-3) 금지문자, 제한시간 input -> 비활성화=false
+            //-4) 최종 입력한 문자 수가 출력
+            if (this.limitTime <= 0) {
+              alert('제한시간에 도달했습니다.');
+              clearInterval(this.timerObj);
+              this.isWritable = true;
+              this.wordCnt = this.inputText.length;
+            }
+          },
+          inputText: function () {
+            //감시 이유 => 금지문자 입력유무
+            //-1) 금지문자를 입력한 경우
+            //-1.1) alert : 금지문자를 입력할 수  없습니다.
+            //-1.2) 별점이 올라감
+            //-1.3) 입력된 금지문자가 제외
+            //-1.4) 남은시간 + 10
 
-        let dataList = this.forhiddenText.split(',');
-        
-        for(let i = 0; i < dataList.length; i++){
-            let keyword = dataList[i];
-            let pos = this.inputText.indexOf(keyword);
-            if(pos > -1){
+            let dataList = this.forhiddenText.split(',');
+
+            for (let i = 0; i < dataList.length; i++) {
+              let keyword = dataList[i];
+              let pos = this.inputText.indexOf(keyword);
+              if (pos > -1) {
                 alert(this.forhiddenText + '는 입력할 수 없습니다.');
                 this.forhiddenCnt++;
                 this.inputText = this.inputText.substr(0, pos);
                 this.limitTime += 10;
+              }
             }
+          }
+        },
+        computed: {
+          resultScore: function () { // 별점 : 금지문자 1개당 12점으로 계산
+            return this.forhiddenCnt * 12;
+          }
         }
-      }
-    },
-    computed : {
-      resultScore : function(){     // 별점 : 금지문자 1개당 12점으로 계산
-        return this.forhiddenCnt * 12;
-      }
-    }
-   })
-   })
-   
+      })
+    })
   </script>
   <div id="app">
     <h1>제한 시간내에 문자 입력하기</h1>
     <label>
       금지문자(,로 나누어 복수입력가능)
-      <input type="text" v-model="forhiddenText" v-bind:disabled="!isWritable" >
+      <input type="text" v-model="forhiddenText" v-bind:disabled="!isWritable">
     </label>
     <br>
     <label>
@@ -110,4 +111,5 @@
     <p> 별점 : {{ resultScore }} (금지문자 1개당 12점)</p>
   </div>
 </body>
+
 </html>
