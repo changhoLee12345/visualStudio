@@ -10,6 +10,7 @@
 </head>
 
 <body>
+
     <div id="app">
         <my-component></my-component>
         <instance-component></instance-component>
@@ -37,6 +38,7 @@
             }
         })
     </script>
+
     <div id="app2">
         <my-component></my-component>
         <instance-component></instance-component>
@@ -54,14 +56,14 @@
             components: {
                 'instance-component': {
                     template: `<div>
-                                    <strong>두번째 인스턴스에 
-                                        등록된 컴포넌트입니다.</strong>
+                                    <strong>두번째 인스턴스에 등록된 컴포넌트입니다.</strong>
                                 </div>`
                 },
                 'm-component': mComponent
             }
         })
     </script>
+
     <div id="app3">
         <my-component></my-component>
         <my-component></my-component>

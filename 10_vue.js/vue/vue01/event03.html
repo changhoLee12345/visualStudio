@@ -25,7 +25,7 @@
       new Vue({
         el: '#app',
         data: {
-          forhiddenText: '', // 금지문자(입력받음) -> ,
+          forhiddenText: '감자,복숭아', // 금지문자(입력받음) -> ,
           isWritable: true, // 태그의 비활성화를 컨트롤
           limitTime: 0, // 남은시간 -> watch 속성
           setTime: 0, // 제한시간(입력받음)
@@ -93,6 +93,7 @@
       })
     })
   </script>
+
   <div id="app">
     <h1>제한 시간내에 문자 입력하기</h1>
     <label>
@@ -110,6 +111,7 @@
     <p> {{ wordCnt }}개의 문자를 입력하였습니다.</p>
     <p> 별점 : {{ resultScore }} (금지문자 1개당 12점)</p>
   </div>
+
 </body>
 
 </html>

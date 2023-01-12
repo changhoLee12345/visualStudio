@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.13/dist/vue.js"></script>
 </head>
+
 <body>
     <div id="app">
         <h1>간단한 계산기</h1>
@@ -21,27 +23,28 @@
     </div>
     <script>
         new Vue({
-            el : '#app',
-            data : {
-                firstVal : 0,
-                secondVal : 0,
-                result : 0
+            el: '#app',
+            data: {
+                firstVal: 23,
+                secondVal: 12,
+                result: 0
             },
-            methods : {
-                plus : function(){
-                   this.result = this.firstVal + this.secondVal;
+            methods: {
+                plus: function () {
+                    this.result = this.firstVal + this.secondVal;
                 },
-                minus : function(){
+                minus: function () {
                     this.result = this.firstVal - this.secondVal;
                 },
-                multi : function(){
+                multi: function () {
                     this.result = this.firstVal * this.secondVal;
                 },
-                divide : function(){
+                divide: function () {
                     this.result = this.firstVal / this.secondVal;
-                }                
+                }
             }
         })
     </script>
 </body>
+
 </html>

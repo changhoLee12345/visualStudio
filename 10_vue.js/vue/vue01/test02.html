@@ -25,6 +25,7 @@
         <label for="">name:<input type="radio" v-bind:value="ord_name" v-model="radiorder"></label>
         <label for="">score:<input type="radio" v-bind:value="ord_score" v-model="radiorder"></label>
         <p>{{radiorder}}</p>
+
         <ul>
             <li v-for="member in sortedMember">{{member.id}}, {{member.name}}, {{member.score}}</li>
         </ul>
@@ -40,14 +41,19 @@
                     orderby: 'no',
                     sortedMember: [],
 
-                    // radiorder: 'nord',
+                    radiorder: 'nord',
                     ord_no: 'no',
                     ord_name: 'name',
                     ord_score: 'score'
                 },
-                computed: {
-                    radiorder: function () {
-                        this.ord_no || this.ord_name || this.ord_score
+                watch: {
+                    radiorder: function (n, o) {
+                        if (n == 'no')
+                            this.sort_by_no()
+                        else if (n == 'name')
+                            this.sort_by_name()
+                        else if (n == 'score')
+                            this.sort_by_score()
                     }
                 },
                 methods: {
