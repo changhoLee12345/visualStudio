@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.13/dist/vue.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 </head>
+
 <body>
     <!-- computed 속성 : 프로퍼티의 일종, 프로퍼티를 연산한 값 -->
     <!-- watch 속성 : 프로퍼티의 변화를 감지해서 필요한 프로세스 진행 -->
@@ -30,51 +32,51 @@
     </div>
     <script>
         new Vue({
-            el : '#app',
-            data : {
-                price : 0,
-                count : 0,
-                myText : ''
+            el: '#app',
+            data: {
+                price: 0,
+                count: 0,
+                myText: ''
             },
-            computed : {
+            computed: {
                 // 산출 프로퍼티 -> data 속성의 프로퍼티에 의존적
-                sum : function(){
+                sum: function () {
                     return this.price * this.count;
                 },
-                taxIncluded : function(){
+                taxIncluded: function () {
                     return this.sum * 1.1;
                 },
-                today : function(){
+                today: function () {
                     return new Date();
                 },
-                computedColor : function(){
+                computedColor: function () {
                     let col = 'green';
 
-                    if(this.remainig < 20){
+                    if (this.remainig < 20) {
                         col = 'orange';
                     }
 
-                    if(this.remainig < 1){
+                    if (this.remainig < 1) {
                         col = 'red';
                     }
                     return col;
                 },
-                remainig : function(){
+                remainig: function () {
                     return 140 - this.myText.length;
                 },
-                disTextArea : function(){
+                disTextArea: function () {
                     let value = false;
-                    if(this.remainig < 1){
+                    if (this.remainig < 1) {
                         value = true;
                     }
                     return value;
                 }
             },
-            methods : {
-                printDate : function(){
-                    return '오늘날짜 : ' + Date.now(); 
+            methods: {
+                printDate: function () {
+                    return '오늘날짜 : ' + Date.now();
                 },
-                getDate : function(){
+                getDate: function () {
                     alert(this.printDate());
                 }
             }
@@ -92,40 +94,40 @@
         // 입력이 없을 경우 dataList가 전부 목록으로 출력
         // 한글자라도 입력이 있을 경우 dataList에서 포함되는 값을 분류
         // 그 분류한 걸 기존의 목록을 대체
-        
+
         //---------------------------------- 제이쿼리
-        $(document).ready(function(){
-      
-        init();
+        $(document).ready(function () {
 
-        $('#app2 > input:text:eq(0)').on('change', changeData);
+            init();
 
-        function changeData(){
-            $('#app2 > ul:first').empty();
+            $('#app2 > input:text:eq(0)').on('change', changeData);
 
-            let keyword = $('#app2 > input:text:eq(0)').val();
-            if(keyword != ''){
-                $(dataList).each(function(idx, val){
-                if(val.match(keyword)){
-                    $('#app2 > ul:first').append(
-                        $('<li />').text(val)
-                    );
-                    }
-                })
-            }else{
-                init();
+            function changeData() {
+                $('#app2 > ul:first').empty();
+
+                let keyword = $('#app2 > input:text:eq(0)').val();
+                if (keyword != '') {
+                    $(dataList).each(function (idx, val) {
+                        if (val.match(keyword)) {
+                            $('#app2 > ul:first').append(
+                                $('<li />').text(val)
+                            );
+                        }
+                    })
+                } else {
+                    init();
                 }
             }
 
 
-            function init(){
-                $(dataList).each(function(idx, val){
+            function init() {
+                $(dataList).each(function (idx, val) {
                     $('#app2 > ul:first').append(
                         $('<li />').text(val)
-                        );
-                    });
-                }
-            });
+                    );
+                });
+            }
+        });
     </script>
     <div id="app3">
         <!-- input의 value 속성이 비어있으면 모든 데이터가 보이고 
@@ -137,20 +139,20 @@
     </div>
     <script>
         new Vue({
-            el : '#app3',
-            data : {
-                findWord : '',
-                items : dataList // 원본데이터
+            el: '#app3',
+            data: {
+                findWord: '',
+                items: dataList // 원본데이터
             },
-            computed : {
-                findItems : function(){
-                    if(this.findWord){
+            computed: {
+                findItems: function () {
+                    if (this.findWord) {
                         //console.log('computed : ', this);
-                        return this.items.filter(function(value){
+                        return this.items.filter(function (value) {
                             //console.log('filter : ', this);
                             return (value.indexOf(this.findWord) > -1);
                         }, this);
-                    }else{
+                    } else {
                         return this.items;
                     }
                 }
@@ -167,31 +169,33 @@
     </div>
     <script>
         new Vue({
-            el : '#app4',
-            data : {
-                forhiddenText : '주말',
-                inputText : '',
-                restSec : 10,
-                timerObj : null
+            el: '#app4',
+            data: {
+                forhiddenText: '주말',
+                inputText: '',
+                restSec: 10,
+                timerObj: null
             },
-            methods : {
-                startTimer : function(){
+            methods: {
+                startTimer: function () {
                     clearInterval(this.timerObj);
                     this.restSec = 10;
-                    this.timerObj = setInterval(()=>{ this.restSec--}, 1000);
+                    this.timerObj = setInterval(() => {
+                        this.restSec--
+                    }, 1000);
                 }
             },
-            watch : {
-                inputText : function(){
+            watch: {
+                inputText: function () {
                     let pos = this.inputText.indexOf(this.forhiddenText);
-                    if(pos > -1){
+                    if (pos > -1) {
                         alert(this.forhiddenText + '는 입력할 수 없습니다.');
                         this.inputText = this.inputText.substr(0, pos);
                         // 오늘은 주말 -> 오늘은 
                     }
                 },
-                restSec : function(){
-                    if(this.restSec <= 0){
+                restSec: function () {
+                    if (this.restSec <= 0) {
                         alert('제한시간입니다');
                         clearInterval(this.timerObj);
                     }
@@ -200,4 +204,5 @@
         })
     </script>
 </body>
+
 </html>
