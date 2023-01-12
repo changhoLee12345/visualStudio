@@ -33,7 +33,7 @@
             // template: `<div id="repid">
             //              <p>{{message}}</p>
             //            </div>`,
-            template: '#temp',
+            // template: '#temp',
             components: {
                 'my-component': {
                     template: `<ul>
@@ -46,7 +46,7 @@
                             banana: 'ate banana'
                         }
                     }
-                }
+                },
             },
         })
         console.log(vm);
@@ -54,6 +54,20 @@
         var cm = new Vue({
             parent: vm
         })
+        console.log(cm);
+    </script>
+
+    <div id="render">
+
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#render',
+            render: function (h) {
+                return h('h1', 'hello, world')
+            },
+        })
+        console.log(vm)
     </script>
 </body>
 
