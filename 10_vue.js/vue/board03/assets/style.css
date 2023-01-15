@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 html {
 	width: 80%;
 	margin-right: auto;
@@ -8,7 +9,12 @@ html {
 	line-height: 1.5;
 }
 
-input,button,select,optgroup,textarea,table {
+input,
+button,
+select,
+optgroup,
+textarea,
+table {
 	font-family: inherit;
 	font-size: inherit;
 	line-height: inherit;
@@ -23,12 +29,15 @@ button {
 	background-color: #007bff;
 	transition: background-color .2s
 }
+
 button:hover {
 	background-color: #0069d9;
 }
+
 button:active {
 	background-color: #003c7c;
 }
+
 button:disabled {
 	opacity: .5;
 	pointer-events: none;
@@ -45,6 +54,7 @@ textarea {
 	width: 500px;
 	height: 200px;
 }
+
 select {
 	border: 2px solid #ced4da;
 }
@@ -55,14 +65,19 @@ select {
 	width: 100%;
 }
 
-#list td, #list th {
+#list td,
+#list th {
 	border: 1px solid #ddd;
 	padding: 8px;
 }
 
-#list tr:nth-child(even){background-color: #f2f2f2;}
+#list tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
 
-#list tr:hover {background-color: #ddd;}
+#list tr:hover {
+	background-color: #ddd;
+}
 
 #list th {
 	padding-top: 12px;

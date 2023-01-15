@@ -1,5 +1,5 @@
 export default {
-    template : `<div>
+    template: `<div>
                     <table id="list">
                         <tr>
                             <td>글제목</td>
@@ -16,38 +16,40 @@ export default {
                                  v-bind:to="{ name : 'boardList'}">목록</router-link>
                     <button style="float:right;" v-on:click="boardSave">저장</button>
                 </div>`,
-    data : function(){
+    data: function () {
         return {
-            title : '',
-            content : ''
+            title: '',
+            content: ''
         }
     },
-    methods : {
-        boardSave : function(){
+    methods: {
+        boardSave: function () {
             let boardInfo = {
-                'id' : 2,
-                'title' : this.title,
-                'post' : this.content
+                'id': 2,
+                'title': this.title,
+                'post': this.content
             }
 
             const VueObject = this;
 
             $.ajax({
-                url : 'http://192.168.0.2:8081/myserver/boardInsert',
-                type : 'post',
-                data : boardInfo,
-                dataType : 'json',
-                success : function(data){
-                    if(data != null){
-                        VueObject.$router.push({ name : 'boardList'});
-                    }else{
+                url: 'http://192.168.0.2:8081/myserver/boardInsert',
+                type: 'post',
+                data: boardInfo,
+                dataType: 'json',
+                success: function (data) {
+                    if (data != null) {
+                        VueObject.$router.push({
+                            name: 'boardList'
+                        });
+                    } else {
                         alert("정상적으로 등록되지 않았습니다.");
                     }
                 },
-                error : function(reject){
+                error: function (reject) {
                     console.log(reject);
                 }
-            })      
+            })
 
         }
     }

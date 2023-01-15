@@ -1,5 +1,5 @@
-export default{
-    template : `<div>
+export default {
+    template: `<div>
                     <table id="list">
                         <!-- HEADER -->
                         <tr>
@@ -22,51 +22,56 @@ export default{
                                  style="float:right;" 
                                  v-bind:to="{ name : 'boardWrite'}">글쓰기</router-link>
                 </div>`,
-    data : function(){
+    data: function () {
         return {
-            object : []
+            object: []
         }
     },
-    created : function(){
+    created: function () {
         const vueObject = this;
         $.ajax({
-            url : 'http://192.168.0.2:8081/myserver/boardList',
-            type : 'get',
-            data : { 'id' : 2 },
-            dataType : 'json',
-            success : function(data){
+            url: 'http://192.168.0.2:8081/myserver/boardList',
+            type: 'get',
+            data: {
+                'id': 2
+            },
+            dataType: 'json',
+            success: function (data) {
                 vueObject.object = data;
             },
-            error : function(reject){
+            error: function (reject) {
                 console.log(reject);
             }
         })
     },
-    methods : {
-        boardDelete : function(no){
+    methods: {
+        boardDelete: function (no) {
             let index = 0;
-            for(let i=0; i< this.object.length; i++){
-                if(this.object[i].no == no){
-                   index = i;
-                   break;
+            for (let i = 0; i < this.object.length; i++) {
+                if (this.object[i].no == no) {
+                    index = i;
+                    break;
                 }
             }
 
             const VueObject = this;
 
             $.ajax({
-                url : 'http://192.168.0.2:8081/myserver/boardDelete',
-                type : 'post',
-                data : { 'id' : 2, 'no' : no },
-                dataType : 'json',
-                success : function(data){
-                    if(data != null){
-                       VueObject.object.splice(index, 1); 
-                    }else{
+                url: 'http://192.168.0.2:8081/myserver/boardDelete',
+                type: 'post',
+                data: {
+                    'id': 2,
+                    'no': no
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data != null) {
+                        VueObject.object.splice(index, 1);
+                    } else {
                         alert('정상적으로 삭제되지 않았습니다.');
                     }
                 },
-                error : function(reject){
+                error: function (reject) {
                     console.log(reject);
                 }
             })
