@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>boardPractice.html</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://unpkg.com/vue@2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h2>간단한 게시판.</h2>
+        <input type="file" @change="loadData">
+        <my-board-list v-if="listOK" v-bind:object="dataArray" v-on:board-delete="boardDelete"
+            v-on:board-read="boardRead" v-on:board-write="boardWrite">
+        </my-board-list>
+        <my-board-read v-if="readOK" v-bind:object="boardInfo" v-on:board-list="boardList">
+        </my-board-read>
+        <my-board-write v-if="writeOK" v-on:board-list="boardList" v-on:board-save="boardSave">
+        </my-board-write>
+    </div>
+    <script>
+        // 목록조회 component.
+        const MyBoardList = {
+            template: `
+            <div>
+                <table id="list">
+                    <tr>
+                        <th>글번호</th>
+                        <th>글제목</th>
+                        <th>조회수</th>
+                        <th>삭제</th>
+                    </tr>
+                    <tr v-for="board in object">
+                        <td>{{board.no}}</td>
+                        <td v-on:click="boardReadChild(board)">{{board.title}}</td>
+                        <td>{{board.view}}</td>
+                        <td><button v-on:click="boardDeleteChild(board.no)">삭제</button></td>
+                    </tr>
+                </table>
+                <button v-on:click="boardWriteChild" style="float: right;">글쓰기</button>
+            </div>`,
+            props: ['object'],
+            methods: {
+                boardDeleteChild: function (no) {
+                    // 삭제.
+                    this.$emit('board-delete', no)
+                },
+                boardReadChild: function (info) {
+                    this.$emit('board-read', info);
+                },
+                boardWriteChild: function () {
+                    this.$emit('board-write');
+                }
+            }
+        }
+        // 한건조회 component.
+        const MyBoardRead = {
+            template: `
+            <div>
+                <table id="list">
+                    <tr>
+                        <th>글번호</th>
+                        <td>{{object.no}}</td>
+                        <th>글제목</th>
+                        <td>{{object.title}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">{{object.content}}</td>
+                    </tr>
+                </table>
+                <button v-on:click="boardListChild">목록보기</button>
+            </div>
+            `,
+            props: ['object'],
+            methods: {
+                boardListChild: function () {
+                    this.$emit('board-list')
+                }
+            }
+        }
+        // 글 작성 component
+        const MyBoardWrite = {
+            template: `
+            <div>
+                <table id="list">
+                    <tr>
+                        <td>글제목</td>
+                        <td><input type="text" v-model="title"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><textarea v-model="content"></textarea></td>
+                    </tr>
+                </table>
+                <button v-on:click="boardListChild">목록보기</button>
+                <button v-on:click="boardSaveChild">저장</button>
+            </div>
+            `,
+            props: [],
+            data: function () {
+                return {
+                    title: 'sameple title',
+                    content: 'sample content'
+                }
+            },
+            methods: {
+                boardListChild: function () {
+                    this.$emit('board-list')
+                },
+                boardSaveChild: function () {
+                    this.$emit('board-save', this.title, this.content)
+                }
+            }
+        }
+
+        // Root Component.
+        new Vue({
+            el: '#app',
+            data: {
+                dataArray: [],
+                boardInfo: {},
+                listOK: true,
+                readOK: false,
+                writeOK: false
+            },
+            components: {
+                'my-board-list': MyBoardList,
+                'my-board-read': MyBoardRead,
+                'my-board-write': MyBoardWrite
+            },
+            methods: {
+                loadData: function (e) {
+                    var file = e.target.files[0];
+                    console.log(file)
+                    var vm = this;
+                    if (file) {
+                        var reader = new FileReader();
+                        reader.readAsText(file);
+                        reader.onload = function (e) {
+                            var result = JSON.parse(e.target.result);
+                            console.log(result);
+                            vm.dataArray = result.boards;
+                        }
+                    }
+                },
+                boardDelete: function (no) {
+                    for (let i = 0; i < this.dataArray.length; i++) {
+                        if (this.dataArray[i].no == no) {
+                            this.dataArray.splice(i,
+                                1);
+                        }
+                    }
+                },
+                boardRead: function (info) {
+                    this.boardInfo = info;
+                    this.readOK = true;
+                    this.listOK = false;
+                    this.writeOK = false;
+                    // 글조회 마다 카운트를 증가.
+                    for (let i = 0; i < this.dataArray.length; i++) {
+                        if (this.dataArray[i].no == info.no) {
+                            this.dataArray[i].view += 1;
+                        }
+                    }
+                },
+                boardList: function () {
+                    this.listOK = true;
+                    this.readOK = false;
+                    this.writeOK = false;
+                },
+                boardWrite: function () {
+                    this.writeOK = true;
+                    this.listOK = false;
+                    this.readOK = false;
+                },
+                boardSave: function (title, content) {
+                    let no = 1;
+                    if (this.dataArray.length != 0) {
+                        no = parseInt(this.dataArray[this.dataArray.length - 1].no) + 1;
+                    }
+                    let boardInfo = {
+                        no: no,
+                        title: title,
+                        content: content,
+                        view: 1
+                    }
+                    this.dataArray.push(boardInfo)
+                    this.listOK = true;
+                    this.readOK = false;
+                    this.writeOK = false;
+                }
+            },
+            created: function () {
+                axios.get('./boards.json').then(result => {
+                    this.dataArray = result.data.boards;
+                })
+                this.dataArray = [];
+            }
+        })
+
+        function downloadFiles(data, file_name, file_type) {
+            var file = new Blob([data], {
+                type: file_type
+            });
+            if (window.navigator.msSaveOrOpenBlob)
+                window.navigator.msSaveOrOpenBlob(file, file_name);
+            else {
+                var a = document.createElement("a"),
+                    url = URL.createObjectURL(file);
+                a.href = url;
+                a.download = file_name;
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(function () {
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                }, 0);
+            }
+        }
+    </script>
+</body>
+
+</html>
