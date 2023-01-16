@@ -15,6 +15,7 @@
     <div id="app">
         <h2>간단한 게시판.</h2>
         <input type="file" @change="loadData">
+        <button v-on:click="saveBoardList">게시판저장하기</button>
         <my-board-list v-if="listOK" v-bind:object="dataArray" v-on:board-delete="boardDelete"
             v-on:board-read="boardRead" v-on:board-write="boardWrite">
         </my-board-list>
@@ -192,6 +193,22 @@
                     this.listOK = true;
                     this.readOK = false;
                     this.writeOK = false;
+                },
+                saveBoardList: function () {
+                    let data = this.dataArray
+                    if (data.length == 0) {
+                        alert('저장할 내용이 없습니다.')
+                        return;
+                    }
+                    let fileName = 'boards.json';
+                    if (typeof data == 'object') {
+                        data = {
+                            boards: data
+                        }
+                        data = JSON.stringify(data, null, '\t')
+                        console.log(data)
+                        downloadFiles(data, fileName, 'text/json');
+                    }
                 }
             },
             created: function () {
@@ -206,9 +223,11 @@
             var file = new Blob([data], {
                 type: file_type
             });
-            if (window.navigator.msSaveOrOpenBlob)
+            if (window.navigator.msSaveOrOpenBlob) {
+                console.log('first')
                 window.navigator.msSaveOrOpenBlob(file, file_name);
-            else {
+            } else {
+                console.log('second')
                 var a = document.createElement("a"),
                     url = URL.createObjectURL(file);
                 a.href = url;
