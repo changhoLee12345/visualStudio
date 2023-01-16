@@ -1,5 +1,5 @@
 export default {
-    template : `<div>
+    template: `<div>
                     <table id="list">
                         <tr>
                             <td>글제목</td>
@@ -11,39 +11,39 @@ export default {
                             </td>
                         </tr>     
                     </table>
-                    <router-link tag="button" 
-                                 style="float:right;" 
-                                 v-bind:to="{ name : 'boardList'}">목록</router-link>
+                    <router-link tag="button" style="float:right;" v-bind:to="{ name : 'boardList'}">목록</router-link>
                     <button style="float:right;" v-on:click="boardSave">저장</button>
                 </div>`,
-    data : function(){
+    data: function () {
         return {
-            title : '',
-            content : ''
+            title: '',
+            content: ''
         }
     },
-    methods : {
-        boardSave : function(){
+    methods: {
+        boardSave: function () {
             let dataList = this.$parent.getParentData();
 
             let no = 1;
-            if(dataList.length != 0){
+            if (dataList.length != 0) {
                 let index = dataList.length - 1;
                 no = parseInt(dataList[index].no) + 1;
             }
 
             let boardInfo = {
-                'no' : no,
-                'title' : this.title,
-                'content' : this.content,
-                'view' : 1
+                'no': no,
+                'title': this.title,
+                'content': this.content,
+                'view': 1
             }
 
             dataList.push(boardInfo);
-            
+
             this.$parent.setParentData(dataList);
 
-            this.$router.push({ name : 'boardList'});
+            this.$router.push({
+                name: 'boardList'
+            });
 
         }
     }

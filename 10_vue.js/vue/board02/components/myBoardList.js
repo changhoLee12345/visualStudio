@@ -1,5 +1,5 @@
-export default{
-    template : `<div>
+export default {
+    template: `<div>
                     <table id="list">
                         <!-- HEADER -->
                         <tr>
@@ -22,22 +22,21 @@ export default{
                                  style="float:right;" 
                                  v-bind:to="{ name : 'boardWrite'}">글쓰기</router-link>
                 </div>`,
-    data : function(){
+    data: function () {
         return {
-            object : []
+            object: []
         }
     },
-    created : function(){
+    created: function () {
         this.object = this.$parent.getParentData();
     },
-    methods : {
-        boardDelete : function(no){
-            for(let i=0; i< this.object.length; i++){
-                if(this.object[i].no == no){
+    methods: {
+        boardDelete: function (no) {
+            for (let i = 0; i < this.object.length; i++) {
+                if (this.object[i].no == no) {
                     this.object.splice(i, 1);
                 }
             }
-
             this.$parent.setParentData(this.object);
         }
     }

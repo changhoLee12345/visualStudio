@@ -1,5 +1,5 @@
 export default {
-    template : `<div>
+    template: `<div>
                     <table id="list">
                         <tr>
                             <td style="width:50px;">글제목</td>
@@ -13,5 +13,5 @@ export default {
                                  style="float:right;"
                                  v-bind:to="{ name : 'boardList' }">목록</router-link>
                 </div>`,
-    props : ['item']
+    props: ['item']
 }

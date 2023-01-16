@@ -4,37 +4,37 @@ import myBoardRead from '../components/myBoardRead.js'
 import myBoardWrite from '../components/myBoardWrite.js'
 
 export default new VueRouter({
-    mode : 'history',
-    routes : [
+    mode: 'history',
+    routes: [
         //main
         {
-            path : '/',
-            name : 'main',
-            component : main
+            path: '/',
+            name: 'main',
+            component: main
         },
         //boardList
         {
-            path : '/boardList',
-            name : 'boardList',
-            component : myBoardList
+            path: '/boardList',
+            name: 'boardList',
+            component: myBoardList
         },
         //boardRead
         {
-            path : '/boardRead/:item', 
-            name : 'boardRead',
-            component : myBoardRead,
-            props : true
+            path: '/boardRead/:item',
+            name: 'boardRead',
+            component: myBoardRead,
+            props: true
         },
         //boardWrite
         {
-            path : '/boardWrite',
-            name : 'boardWrite',
-            component : myBoardWrite
+            path: '/boardWrite',
+            name: 'boardWrite',
+            component: myBoardWrite
         },
         //default
         {
-            path : '*',
-            redirect : '/'
+            path: '*',
+            redirect: '/'
         }
     ]
 })

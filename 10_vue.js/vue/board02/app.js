@@ -8,21 +8,21 @@ let template = `
 </div>`
 
 new Vue({
-    el : '#app',
-    template : template,
-    data : {
-       dataArray : {}
+    el: '#app',
+    template: template,
+    data: {
+        dataArray: {}
     },
-    components : {
+    components: {
         myHeader // myHeader : myHeader -> 'my-header' : myHeader
     },
-    methods : {
-        getParentData : function(){
+    methods: {
+        getParentData: function () {
             return this.dataArray['board'];
         },
-        setParentData : function(dataList){
+        setParentData: function (dataList) {
             this.dataArray['board'] = dataList;
         }
     },
-    router  // router : router
+    router // router : router
 })
