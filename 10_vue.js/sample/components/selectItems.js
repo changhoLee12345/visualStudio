@@ -16,7 +16,7 @@ export default {
         return {}
     },
     methods: {
-        itemClick: function (id, attr) {
+        itemClick: function (id) {
             // this.$parent.$data.itemList.forEach((item, idx) => {
             //     if (item.id == id) {
             //         let newItem = {
@@ -27,6 +27,7 @@ export default {
             //         this.$parent.$data.itemList.splice(idx, 1, newItem);
             //     }
             // })
+            // 하위요소에서 처리하지 말고 상위컴포넌트에서 처리하도록 수정.
             this.$emit('sel-item', id)
         },
         deleteRow: function (id) {
