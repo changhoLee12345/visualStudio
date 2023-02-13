@@ -11,10 +11,35 @@
 
 <body>
     <div id="app">
+        <simple-counter></simple-counter>
+        <simple-counter></simple-counter>
+        <simple-counter></simple-counter>
     </div>
     <script>
+        let cnt = 0;
+        // Vue.component('simple-counter', {
+        //     template: '<button v-on:click="counter += 1">{{counter}}</button>',
+        //     data: function () {
+        //         return {
+        //             counter: cnt
+        //         }
+        //     }
+        // })
         new Vue({
             el: '#app',
+            data: {
+                counter: cnt
+            },
+            components: {
+                'simple-counter': {
+                    template: '<button v-on:click="counter += 1">{{counter}}</button>',
+                    data: function () {
+                        return {
+                            counter: this.counter
+                        }
+                    }
+                }
+            }
         })
     </script>
 </body>

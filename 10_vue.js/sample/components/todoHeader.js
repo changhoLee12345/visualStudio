@@ -12,7 +12,7 @@ export default {
 	template,
 	data: function () {
 		return {
-			newItem: 'Init Data'
+			newItem: ''
 		}
 	},
 	methods: {

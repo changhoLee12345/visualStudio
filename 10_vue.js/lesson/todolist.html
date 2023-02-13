@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,6 +14,7 @@
     </style>
     <script src="https://unpkg.com/vue@2"></script>
 </head>
+
 <body>
     <h2>TO DO List</h2>
     <div id="app">
@@ -31,28 +33,43 @@
         <p>{{remaining}} / {{todos.length}}</p>
     </div>
     <script>
-var vm =        new Vue({
+        var vm = new Vue({
             el: '#app',
             data: {
                 addText: 'test',
                 addDate: '20230115',
-                todos: [
-                    {done:false, text:'bread', doneDate: '20230115'},
-                    {done:false, text:'coffee', doneDate: '20230201'},
-                    {done:true, text:'tea', doneDate: '20230129'},
+                todos: [{
+                        done: false,
+                        text: 'bread',
+                        doneDate: '20230115'
+                    },
+                    {
+                        done: false,
+                        text: 'coffee',
+                        doneDate: '20230201'
+                    },
+                    {
+                        done: true,
+                        text: 'tea',
+                        doneDate: '20230129'
+                    },
                 ]
             },
             computed: {
-                remaining: function() {
-                    return this.todos.filter(function(val){
+                remaining: function () {
+                    return this.todos.filter(function (val) {
                         return val.done;
                     }).length;
                 }
             },
             methods: {
                 addToDo: function () {
-                    if(this.addText && this.addDate) {
-                        this.todos.push({done:false, text:this.addText, doneDate: this.addDate});
+                    if (this.addText && this.addDate) {
+                        this.todos.push({
+                            done: false,
+                            text: this.addText,
+                            doneDate: this.addDate
+                        });
                         this.addText = '';
                         this.addDate = '';
                         console.log(this.$el.querySelector('input[placeholder]:nth-of-type(1)').focus());
@@ -76,4 +93,5 @@ var vm =        new Vue({
         console.log(vm)
     </script>
 </body>
+
 </html>
