@@ -81,8 +81,8 @@
             el: '#app2',
             router: vueRouter,
             methods: {
-                changeURL: function () {
-                    if () {
+                changeURL: function (url) {
+                    if (url) {
                         this.$route.push({
                             name: 'user',
                             params: {
