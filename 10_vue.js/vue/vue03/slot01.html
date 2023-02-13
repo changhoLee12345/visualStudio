@@ -18,9 +18,9 @@
     <script>
         const childComponent = {
             template: `<div>
-                            {{ message }}
-                            <slot></slot>
-                        </div>`,
+                         {{ message }}
+                         <slot></slot>
+                       </div>`,
             props: ['message']
         }
 
@@ -41,13 +41,13 @@
     <script>
         const component = {
             template: `<div>
-                            <slot name="header"></slot>
-                            <br>
-                            <h1>컴포넌트 데이터입니다.</h1>
-                            {{ text }}
-                            <br>
-                            <slot name="footer"></slot>
-                        </div>`,
+                         <slot name="header"></slot>
+                         <br>
+                         <h1>컴포넌트 데이터입니다.</h1>
+                         {{ text }}
+                         <br>
+                         <slot name="footer"></slot>
+                       </div>`,
             props: ['text']
         }
 
@@ -76,7 +76,7 @@
     </div>
     <script>
         const formComponent = {
-            template: `<div>
+            template: ` <div>
                             <form>
                                 <slot></slot>
                                 <!--<label for="title">{{title}}</label>-->
@@ -116,7 +116,7 @@
     </div>
     <script>
         const bookComponent = {
-            template: `<div>
+            template: ` <div>
                             <slot name="header"></slot>
                             <slot name="book"
                                   v-for="book in bookList"

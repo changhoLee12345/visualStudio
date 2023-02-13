@@ -10,8 +10,10 @@ export default {
     methods: {
         loadData: function (event) { // 파일을 읽어들이는 메소드
             let file = event.target.files[0].name;
+            console.log(file);
+            let url = 'vue/board02/data/' + file;
             if (file) {
-                fetch(file)
+                fetch(url)
                     .then(response => response.json())
                     .then(data => {
                         this.parentData.dataArray = data;
@@ -23,7 +25,8 @@ export default {
                             name: 'boardList'
                         });
 
-                    }).catch(err => console.log(err));
+                    })
+                    .catch(err => console.log(err));
             }
         },
         saveBoardList: function () {
