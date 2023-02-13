@@ -38,7 +38,7 @@
     </div>
     <script>
         const printComponent = {
-            template: `<div>
+            template: ` <div>
                             <p> 이름 : {{ name }}, 나이 : 만 {{ age - 1 }}, 소속 : {{ dept }} </p> 
                         </div>`,
             props: {
@@ -52,7 +52,7 @@
         }
 
         const inputComponent = {
-            template: `<div>
+            template: ` <div>
                             <div>
                                 <div>
                                     <label for="user_name">이름</label>
@@ -80,7 +80,7 @@
                             <div>
                                 <print-component v-for="item in userList" v-bind="item"></print-component>
                             </div>
-                       </div>`,
+                        </div>`,
             data: function () {
                 return {
                     userName: '',

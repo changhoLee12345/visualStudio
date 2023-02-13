@@ -15,7 +15,6 @@
         <router-link to="/main">main</router-link>
         <router-link to="/info">info</router-link>
         <!-- <a href="#/main" class="">main</a> -->
-
         <router-view></router-view>
     </div>
     <script>
@@ -39,8 +38,9 @@
                 {
                     path: '/user/:id/pwd/:pwd',
                     component: {
-                        template: `<div> User {{ this.$route.params.id }} <br>
-                                          비밀번호 {{ this.$route.params.pwd }} </div>`
+                        template: ` <div> User {{ this.$route.params.id }} <br>
+                                          비밀번호 {{ this.$route.params.pwd }}
+                                    </div>`
                     }
                 }
             ]
@@ -51,14 +51,16 @@
             router: router
         })
     </script>
+
+
     <div id="app2">
-        <router-link tag="button" v-bind:to="{ name : 'user', 
-                                                params : { username : 'erina' }}">
+        <router-link tag="button" v-bind:to="{ name : 'user', params : { username : 'erina' }}">
             <!--<router-link tag="button" to="/users/erina">-->
             User
         </router-link>
         <router-view></router-view>
     </div>
+
     <script>
         const vueRouter = new VueRouter({
             mode: 'history',
@@ -68,9 +70,9 @@
                 path: '/users/:username',
                 name: 'user',
                 component: {
-                    template: `<div>
+                    template: ` <div>
                                    <p> 유저 정보 : {{ username }} </p>
-                               </div>`,
+                                </div>`,
                     props: ['username']
                 },
                 props: true
@@ -96,6 +98,7 @@
             }
         })
     </script>
+
 </body>
 
 </html>
