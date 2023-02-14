@@ -130,8 +130,10 @@
                     let year = today.getFullYear();
                     let month = ('0' + (today.getMonth() + 1)).slice(-2);
                     let day = ('0' + today.getDate()).slice(-2);
-
-                    return year + '-' + month + '-' + day;
+                    let hh = ('0' + today.getHours()).slice(-2);
+                    let mm = ('0' + today.getMinutes()).slice(-2);
+                    let ss = ('0' + today.getSeconds()).slice(-2);
+                    return year + '-' + month + '-' + day + ' ' + hh + ':' + mm + ':' + ss;
                 }
             },
             watch: {
@@ -140,7 +142,8 @@
                     let pTag = document.querySelector('p');
                     let message = document.createElement('p');
                     message.textContent = this.today() + ' 기준으로 최종 업데이트 되었습니다.';
-                    pTag.after(message);
+                    pTag.replaceWith(message);
+                    // console.log(pTag.children[0])
                 }
             }
         })

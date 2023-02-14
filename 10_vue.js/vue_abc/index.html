@@ -16,11 +16,8 @@
         <member-list v-if="listOK" v-bind:members="memberList" v-on:member-modify="memberModify"
             v-on:member-form="memberAddForm">
         </member-list>
-
         <member-add v-if="addOK" v-on:member-add="memberSave"></member-add>
-
         <member-modify v-if="modifyOK" v-bind:member="memberInfo" v-on:member-update="memberUpdate"></member-modify>
-
     </div>
 
     <script>
