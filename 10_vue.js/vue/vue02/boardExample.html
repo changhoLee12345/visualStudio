@@ -168,6 +168,7 @@
                         });
                         let a = document.createElement('a');
                         a.download = 'board.json';
+                        console.log(window.URL.createObjectURL(blob))
                         a.href = window.URL.createObjectURL(blob);
                         a.click();
                     }
