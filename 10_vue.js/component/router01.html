@@ -1,13 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://unpkg.com/vue@2"></script>
+    <script src="https://unpkg.com/vue-router@3"></script>
 </head>
+
 <body>
-    
+    <div id="app">
+        <h1>HelloApp</h1>
+        <p>
+            <router-link to="/vue">go to vue</router-link>
+        </p>
+        <p>
+            <router-link to="/react">go to react</router-link>
+        </p>
+        <router-view></router-view>
+    </div>
+
+    <script>
+        const Comp1 = {
+            template: `<div>Vue</div>`
+        }
+        const Comp2 = {
+            template: `<div>React</div>`
+        }
+
+        const router = new VueRouter({
+            routes: [{
+                path: '/vue',
+                component: Comp1
+            }, {
+                path: '/react',
+                component: Comp2
+            }]
+        })
+
+        new Vue({
+            el: '#app',
+            router: router
+        })
+    </script>
 </body>
+
 </html>
