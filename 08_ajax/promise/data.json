@@ -1,0 +1,21 @@
+[{
+        "job": "Work",
+        "hour": 11
+    },
+    {
+        "job": "Eat",
+        "hour": 2
+    },
+    {
+        "job": "Commute",
+        "hour": 2
+    },
+    {
+        "job": "Watch",
+        "hour": 2
+    },
+    {
+        "job": "Sleep",
+        "hour": 7
+    }
+]
