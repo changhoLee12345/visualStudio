@@ -1,4 +1,4 @@
-class Table {
+export class Table {
 
     constructor(data) {
         this.tag = '';
@@ -14,6 +14,7 @@ class Table {
         this.tag += '</tr></thead>';
         // return hdr;
     }
+
     createBody(data) {
         this.tag += '<tbody>';
         for (let row of data) {
@@ -46,11 +47,11 @@ let data = [{
     age: 20
 }]
 
-let table = new Table(data);
-Table.prototype.getTagInfo = function () {
-    console.log(this)
-    return this.tag;
-}
+// let table = new Table(data);
+// Table.prototype.getTagInfo = function () {
+//     console.log(this)
+//     return this.tag;
+// }
 
-document.write(table.createTable());
-console.log(table.getTagInfo());
+// document.write(table.createTable());
+// console.log(table.getTagInfo());
