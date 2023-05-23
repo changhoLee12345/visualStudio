@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+        google.charts.setOnLoadCallback(drawChart);
+
+        var origData = [
+            ['Task', 'Hours per Day'],
+            ['도시락', 3],
+            ['갈비탕', 2],
+            ['오므라이스', 2],
+            ['짬뽕', 2],
+            ['비빔밥', 7],
+            ['메밀소바', 3]
+        ];
+
+        function drawChart() {
+
+
+            var data = google.visualization.arrayToDataTable(origData);
+
+            var options = {
+                title: 'My Daily Activities',
+                is3D: true
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+
+<body>
+    <div id="piechart" style="width: 900px; height: 500px;"></div>
+    <div id="app">
+        <ul>
+            <li v-for="(item, idx) in dataArray" v-if="idx>0">{{item[0]}} : {{item[1]}}
+                <button v-on:click="addOne(idx)">vote</button></li>
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                dataArray: origData
+            },
+            methods: {
+                addOne: function (val) {
+                    var obj = this.dataArray[val];
+                    obj[1]++;
+                    this.dataArray.splice(val, 1, obj);
+                    drawChart();
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

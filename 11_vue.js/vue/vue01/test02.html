@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <button v-on:click="sort_by_no">학번순</button>
+        <button v-on:click="sort_by_name">이름순</button>
+        <button v-on:click="sort_by_score">성적순</button>
+
+        <select v-model="orderby" v-on:change="orderFnc">
+            <option value="" disabled>::선택::</option>
+            <option v-for="option in options" v-bind:value="option.val">{{option.name}}</option>
+        </select>
+
+        <label for="">no:<input type="radio" v-bind:value="ord_no" v-model="radiorder"></label>
+        <label for="">name:<input type="radio" v-bind:value="ord_name" v-model="radiorder"></label>
+        <label for="">score:<input type="radio" v-bind:value="ord_score" v-model="radiorder"></label>
+        <p>{{radiorder}}</p>
+
+        <ul>
+            <li v-for="member in sortedMember">{{member.id}}, {{member.name}}, {{member.score}}</li>
+        </ul>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            new Vue({
+                el: '#app',
+                data: {
+                    members: members,
+                    options: options,
+
+                    orderby: 'no',
+                    sortedMember: [],
+
+                    radiorder: 'nord',
+                    ord_no: 'no',
+                    ord_name: 'name',
+                    ord_score: 'score'
+                },
+                watch: {
+                    radiorder: function (n, o) {
+                        if (n == 'no')
+                            this.sort_by_no()
+                        else if (n == 'name')
+                            this.sort_by_name()
+                        else if (n == 'score')
+                            this.sort_by_score()
+                    }
+                },
+                methods: {
+                    orderFnc: function () {
+                        if (this.orderby == 'no')
+                            this.sort_by_no()
+                        else if (this.orderby == 'name')
+                            this.sort_by_name()
+                        else if (this.orderby == 'score')
+                            this.sort_by_score()
+                    },
+                    sort_by_no: function () {
+                        this.sortedMember = this.members.sort(function (first, last) {
+                            return first.id - last.id;
+                        })
+                    },
+                    sort_by_name: function () {
+                        this.sortedMember = this.members.sort(function (first, last) {
+                            if (first.name < last.name) return -1
+                            else return 1;
+                        })
+                    },
+                    sort_by_score: function () {
+                        this.sortedMember = this.members.sort(function (first, last) {
+                            return last.score - first.score;
+                        })
+                    }
+                },
+                created: function () {
+                    this.sortedMember = this.members
+                }
+            });
+        })
+        // select 선택 하는 순으로 정렬기능.
+        // 초기데이터.
+        let members = [{
+                id: 101,
+                name: "Hong",
+                score: 70
+            },
+            {
+                id: 103,
+                name: "Kim",
+                score: 80
+            },
+            {
+                id: 102,
+                name: "Park",
+                score: 95
+            },
+            {
+                id: 104,
+                name: "Choi",
+                score: 75
+            },
+        ]
+        let options = [{
+                val: 'no',
+                name: '학번순'
+            },
+            {
+                val: 'name',
+                name: '이름순'
+            },
+            {
+                val: 'score',
+                name: '성적순'
+            },
+        ]
+    </script>
+
+</body>
+
+</html>

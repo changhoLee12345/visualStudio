@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{hello}}</p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                hello: 'vue.js'
+            },
+            beforeCreate: function () {
+                // data옵션객체와 이벤트를 초기화하기 전에 실행.
+                console.log('beforeCreate event.', this)
+            },
+            created: function () {
+                // vm이 데이터감시 계산된 속성, 이벤트콜백 등 생성자에 전달한 옵션을 내부적처리 후
+                console.log('created event. => this생성 ', this.hello)
+            },
+            beforeMount: function () {
+                // 1.el옵션에 제공한 html태그를 찾아 dom엘리먼트의 내용을 
+                // 랜더링함수의 실행 결과나 template옵션에 제공한 콘텐츠로 바꿈.
+                // 2.초기랜더링이 일어나기 직전, 템플릿 또는 렌더링 함수를 컴파일한 직후 실행.
+                console.log('beforeMount event.', this.$el);
+            },
+            mounted: function () {
+                // 1. vm.$el 생성과 대체가 끝나고 마운트 단계로 들어가기 직전에 호출.
+                // 2. vm.$el 속성이 생성이 되었으므로 dom을 직접 수정.
+                console.log('mounted event.', this.$el);
+            },
+            beforeDestroy: function () {
+                // 1. vm이 메모리에서 소멸되기 직전에 발생.
+                // 2. 데이터 감시자, 자식 컴포넌트, 이벤트리스터 해제 단계 전에 발생.
+                // 3. Vue인스턴스에 추가된 이벤트나 dom 이 제거되지 않은 상태.
+                // 4. 개발자가 임의 추가한 이벤트와 감시, 리액티브 구독 해제, dom을 제거하는 등 할 수 잇음.
+                console.log('beforeDestroy event.', this.$el);
+            },
+            destroyed: function () {
+                // 1. vm이 메모리에서 완전히 제거된 이후 실행.
+                // 2. 모든 디렉티브 바인딩이 해제, 이벤트리스너가 제거, 인스턴스도 제거.
+                console.log('destroyed event.', this.$el);
+            },
+            beforeUpdate: function () {
+                // 1. 동적데이터 바인딩과 연관.
+                // 2. 데이터감시자(watch)를 이용해 인스턴스 내부에서 감시하는 상태를 변경할 때 상태와 연결된
+                // dom을 업데이트하고 동시에 계산된 속성을 새로 고침합.
+                console.log('beforeUpdate event.', this.hello, this.$el.innerHTML);
+            },
+            updated: function () {
+                // 1. 가상dom을 브라우저에 반영한 후 발생.
+                console.log('update event.', this.hello, this.$el.innerHTML);
+            },
+        })
+
+        vm.hello = 'nicee'; // update 이벤트 훅.
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="add">
+                name: <input type="text" v-model="iname"><br>
+                score: <input type="number" v-model="iscore"><br>
+                <button v-on:click="addFruit(iname, iscore)">add</button>
+            </div>
+            <div class="list">
+                <ul>
+                    <li v-for="member of members">name: {{member.name}}, score: {{member.score}}
+                        <button v-on:click="delItem(member.name)">del({{member.name}})</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                iname: '',
+                iscore: 0,
+                members: [{
+                    name: "hong",
+                    score: 70
+                }, {
+                    name: "hwang",
+                    score: 80
+                }, {
+                    name: "park",
+                    score: 75
+                }]
+            },
+            methods: {
+                addFruit: function (name, score) {
+                    this.members.push({
+                        name: name,
+                        score: score
+                    })
+                    this.iname = ''
+                    this.iscore = 0
+                },
+                delItem: function (name) {
+                    let idx = -1;
+
+                    // for 반복문을 활용해서 index 획득.
+                    // for (let i = 0; i < this.members.length; i++) {
+                    //     if (this.members[i].name == name) {
+                    //         idx = i;
+                    //         break;
+                    //     }
+                    // }
+
+                    // reduce를 사용해서 index 획득.
+                    idx = this.members.reduce((acc, member, idx) => {
+                        let ind = member.name == name ? idx : acc;
+                        return ind;
+                    }, -1)
+                    console.log(idx)
+
+                    this.members.splice(idx, 1);
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>
