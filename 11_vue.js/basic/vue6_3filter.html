@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <script src="https://unpkg.com/vue@2"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="even">
+        <!-- <input type="checkbox" v-on:change="evenFnc"> -->
+        <ul>
+            <li v-for="num in evenNumbers">{{num}}</li>
+        </ul>
+        <ul>
+            <li v-for="ent in orderedUser">{{ent.id}}, {{ent.name}}</li>
+        </ul>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                numbers: [1, 2, 3, 4, 5, 6, 7],
+                even: "Y",
+                users: [{
+                        id: 1,
+                        name: "Vue",
+                        lastLogin: new Date(2022, 11, 11, 23, 21, 11)
+                    },
+                    {
+                        id: 2,
+                        name: "Java",
+                        lastLogin: new Date(2022, 11, 11, 23, 21, 11)
+                    },
+                    {
+                        id: 3,
+                        name: "Python",
+                        lastLogin: new Date(2022, 11, 10, 23, 21, 11)
+                    },
+                ]
+            },
+            methods: {
+                evenFnc: function () {
+                    this.even = !this.even;
+                }
+            },
+            computed: {
+                evenNumbers: function () {
+                    var even = this.even;
+                    return this.numbers.filter(function (number) {
+                        if (even == "Y") {
+                            return number % 2 == 0;
+                        } else {
+                            return number % 2 != 0;
+                        }
+                    })
+                },
+                orderedUser: function () {
+                    return _.orderBy(this.users, ['lastLogin', 'name'], 'desc')
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

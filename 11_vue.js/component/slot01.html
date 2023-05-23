@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2"></script>
+</head>
+
+<body>
+    <div id="app">
+        <form-component v-bind:author="authorLabel" v-bind:title="titleLabel">
+            <!-- slot 지정으로 하위요소를 component로 넘겨줌. -->
+            <h3>{{header}}</h3>
+            <p>입력정보:</p>
+        </form-component>
+    </div>
+
+    <script>
+        const FormComponent = {
+            template: `
+            <div>
+                <form>
+                    <slot></slot>
+                    <label for="title">{{title}}</label>
+                    <input id="title" type="text"><br>
+                    <label for="author">{{author}}</label>
+                    <input id="author" type="text"><br>
+                    <button>제출하기</button>
+                </form>
+            </div>
+            `,
+            props: ['title', 'author']
+        }
+
+        new Vue({
+            el: '#app',
+            components: {
+                'form-component': FormComponent
+            },
+            data() {
+                return {
+                    titleLabel: '제목',
+                    authorLabel: '저자',
+                    header: '책 저자 폼'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

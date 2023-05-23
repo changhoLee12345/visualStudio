@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js 애완용품샵</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.13/dist/vue.js"></script>
+    <!-- <script src="https://unpkg.com/vue@3.2.41/dist/vue.global.js"></script> -->
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <h1 v-text="sitename"></h1>
+        </header>
+
+        <main>
+            <div class="row product">
+                <div class="col">
+                    <figure>
+                        <img v-bind:src="product.image">
+                    </figure>
+                </div>
+            </div>
+            <div class="col col-expand">
+                <h1 v-text="product.title"></h1>
+                <p v-html="product.description"></p>
+                <p class="price">{{product.price | formatPrice}}</p>
+            </div>
+        </main>
+        <button class="btn btn-primary btn-lg" v-on:click="addToCart">장바구니담기</button>
+    </div>
+
+    <script src="./life-cycle-hook.js"></script>
+</body>
+
+</html>

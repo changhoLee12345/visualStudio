@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.13/dist/vue.js"></script>
+</head>
+
+<body>
+    <!-- v-model : 양방향 바인딩, value 속성 혹은 select -->
+    <div id="app">
+        <input v-model="myName" placeholder="이름">
+        <p>나는 {{ myName }} 입니다.</p>
+        <textarea v-model="myText"></textarea>
+        <p>문장은, [ {{ myText }} ]</p>
+        <p>문자수는 {{ myText.length }} 자 입니다.</p>
+        <label>
+            <input type="checkbox" v-model="myCheck" true-value="yes" false-value="no">
+            체크박스의 상태 값은 {{ myCheck }}
+        </label>
+        <div>
+            <label><input type="checkbox" v-model="myhobbies" value="book">독서</label>
+            <label><input type="checkbox" v-model="myhobbies" value="movie">영화</label>
+            <label><input type="checkbox" v-model="myhobbies" value="writing">글쓰기</label>
+            <p> (체크박스) 취미 : {{ myhobbies }} </p>
+        </div>
+        <div>
+            <label><input type="radio" v-model="radioData" value="book">독서</label>
+            <label><input type="radio" v-model="radioData" value="movie">영화</label>
+            <label><input type="radio" v-model="radioData" value="writing">글쓰기</label>
+            <p> (체크박스) 취미 : {{ radioData }} </p>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                myName: '',
+                myText: '오늘 하루는 어떠신가요?',
+                myCheck: 'yes',
+                myhobbies: [],
+                radioData: []
+            }
+        })
+    </script>
+
+    <div id="app2">
+        <select v-model="myColor">
+            <option value="" disabled>색을 선택해주세요</option>
+            <option>red</option>
+            <option>green</option>
+            <option>blue</option>
+            <option>orange</option>
+            <option>brown</option>
+        </select>
+        <p v-bind:style="{color : myColor}">선택한 색상은 {{ myColor }} 입니다.</p>
+        <hr>
+        <select v-model="myArray" multiple>
+            <option value="" disabled>색을 선택해주세요</option>
+            <option value="빨강">red</option>
+            <option value="초록">green</option>
+            <option value="파랑">blue</option>
+            <option value="오렌지">orange</option>
+            <option value="갈색">brown</option>
+        </select>
+        <p>선택한 색상은 {{ myArray }} 입니다.</p>
+        <hr>
+        <label><input type="checkbox" v-model="myAgree">동의합니다.</label>
+        <button v-bind:disabled="myAgree==false">송신</button>
+    </div>
+    <script>
+        new Vue({
+            el: '#app2',
+            data: {
+                myColor: [],
+                myArray: [],
+                myAgree: false
+            }
+        })
+    </script>
+
+    <div id="app3">
+        <!-- .lazy : enter 입력하거나 포커스가 이동할 경우에 vue 업데이트 -->
+        <input v-model.lazy="myText">
+        <p>입력 후 표시 {{ myText }}</p>
+        <!-- .number : 입력된 값의 타입을 숫자로 변경 -->
+        <input type="number" v-model.number="myNumber">
+        <p>100을 더해 포시 [ {{ myNumber + 100 }}]</p>
+        <!-- .trim : 입력된 데이터의 앞뒤 공백을 제거 -->
+        <input v-model.trim="strData">
+        <p>앞뒤 공백을 제거 [{{ strData }}]</p>
+    </div>
+    <script>
+        new Vue({
+            el: '#app3',
+            data: {
+                myText: '',
+                myNumber: 0,
+                strData: ''
+            }
+        })
+    </script>
+</body>
+
+</html>

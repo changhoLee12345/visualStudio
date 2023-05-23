@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{message}}</p>
+        <p>{{navigator.appCodeName}}</p>
+        <my-component apple="ate apple"></my-component>
+    </div>
+
+    <script type="text/x-template" id="temp">
+        <div id='app'>
+            <p>{{message}}</p>
+            <p>hhh</p>
+        </div>
+    </script>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello, World',
+                navigator: navigator
+            },
+            // template: `<div id="repid">
+            //              <p>{{message}}</p>
+            //            </div>`,
+            // template: '#temp',
+            components: {
+                'my-component': {
+                    template: `<ul>
+                                  <li>{{banana}}</li>
+                                  <li>{{apple}}</li>
+                               </ul>`,
+                    props: ['apple'],
+                    data: function () {
+                        return {
+                            banana: 'ate banana'
+                        }
+                    }
+                },
+            },
+        })
+        console.log(vm);
+        // vm._data.message = 'Nice, World';
+        var cm = new Vue({
+            parent: vm
+        })
+        console.log(cm);
+    </script>
+
+    <div id="render">
+
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#render',
+            render: function (h) {
+                return h('h1', 'hello, world')
+            },
+        })
+        console.log(vm)
+    </script>
+</body>
+
+</html>
