@@ -13,11 +13,18 @@
 
 <body>
     <div id="app">
-        <member-list v-if="listOK" v-bind:members="memberList" v-on:member-modify="memberModify"
+        <member-list v-if="listOK"
+            v-bind:members="memberList"
+            v-on:member-modify="memberModify"
             v-on:member-form="memberAddForm">
         </member-list>
-        <member-add v-if="addOK" v-on:member-add="memberSave"></member-add>
-        <member-modify v-if="modifyOK" v-bind:member="memberInfo" v-on:member-update="memberUpdate"></member-modify>
+        <member-add v-if="addOK"
+            v-on:member-add="memberSave">
+        </member-add>
+        <member-modify v-if="modifyOK"
+            v-bind:member="memberInfo"
+            v-on:member-update="memberUpdate">
+        </member-modify>
     </div>
 
     <script>
@@ -43,11 +50,17 @@
             props: ['members'],
             data: function () {
                 return {
-                    member: ''
+                    member: {
+                        id: 'user11',
+                        name: 'newbie',
+                        age: 20,
+                        tel: '010-1111'
+                    }
                 }
             },
             methods: {
                 memberModifyChild(member) {
+                    console.log('memberModifyChild, ', this);
                     this.$emit('member-modify', member)
                 },
                 memberAddChild() {
@@ -146,7 +159,7 @@
             }
         }
 
-        new Vue({
+        let vm = new Vue({
             el: '#app',
             components: {
                 'member-add': MemberAdd,
@@ -154,15 +167,19 @@
                 'member-modify': MemberModify
             },
             data: {
-                memberList: [],
                 listOK: true,
                 addOK: false,
                 modifyOK: false,
+                memberList: [],
                 memberInfo: {}
             },
             methods: {
+                memberAddForm() {
+                    this.listOK = false;
+                    this.addOK = true;
+                    this.modifyOK = false;
+                },
                 memberModify: function (member) {
-                    console.log('mem, ', member);
                     this.memberInfo = member;
                     this.listOK = false;
                     this.addOK = false;
@@ -193,19 +210,11 @@
                     this.listOK = true;
                     this.addOK = false;
                     this.modifyOK = false;
-                },
-                memberAddForm() {
-                    this.listOK = false;
-                    this.addOK = true;
-                    this.modifyOK = false;
                 }
             },
             created: function () {
                 axios.get('./members.json')
-                    .then(result => {
-                        console.log(result.data)
-                        this.memberList = result.data;
-                    })
+                    .then(result => this.memberList = result.data)
                     .catch(err => console.lor(err))
             }
         })
