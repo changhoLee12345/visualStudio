@@ -12,28 +12,26 @@
 <body>
 
   <div id="app">
-    <book-component></book-component>
+    <custom-input v-bind:value="searchText" v-on:input="searchText = $event"></custom-input>
   </div>
 
   <script>
-    const BookComponent = function (resolve, reject) {
-      fetch('vue.data')
-        .then(resolve => resolve.json())
-        .then(result => {
-          resolve({
-            template: `
-            <div>
-              <p>${result.result}</p>
-            </div>
-            `
-          })
-        })
-    }
+    Vue.component('custom-input', {
+      props: ['value'],
+      template: `
+      <div>
+        <input
+          v-bind:value="value"
+          v-on:input="$emit('input', $event.target.value)"
+        >
+      </div>
+      `
+    })
 
     new Vue({
       el: '#app',
-      components: {
-        'book-component': BookComponent
+      data: {
+        searchText: 'sample'
       }
     })
   </script>
