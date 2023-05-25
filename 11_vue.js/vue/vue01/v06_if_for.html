@@ -11,9 +11,9 @@
     <div id="app">
         <h3>배열 중 짝수에 해당하는 값만 출력</h3>
         <ul>
-            <template v-for="item in myArray">
-                <li v-if="item % 2 == 0">{{ item }}</li>
-            </template>
+            <!-- <template v-for="item in myArray"> -->
+                <li v-for="(item,idx) in myArray" v-if="idx % 2 == 0">{{ item }} - {{idx}}</li>
+            <!-- </template> -->
         </ul>
         <h3>데이터 변환을 통한 짝수만 출력</h3>
         <ul>
