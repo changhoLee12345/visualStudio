@@ -10,11 +10,11 @@
 
 import modfnc from './module.js';
 modfnc.setData([{
-    name: 'hong',
-    age: 20
+  name: 'hong',
+  age: 20
 }, {
-    name: 'kim',
-    age: 22
+  name: 'kim',
+  age: 22
 }])
 console.log(modfnc.makeTable())
 document.getElementById('show').append(modfnc.makeTable());

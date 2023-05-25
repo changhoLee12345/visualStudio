@@ -2,71 +2,71 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://unpkg.com/vue@2"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@2"></script>
 </head>
 
 <body>
-    <div class="id">
-        <book-component />
-    </div>
+  <div class="id">
+    <book-component />
+  </div>
 
-    <script>
-        // fetch('http://localhost:8080/HelloApp/bookListJson.do')
-        //     .then(resolve => resolve.json())
-        //     .then(result => console.log(result))
-        //     .catch(reject => console.log(reject))
-        let BookComponent = {
-            template: '<div></div>'
-        };
-        fetch('http://localhost:8080/HelloApp/bookListJson.do')
-            .then(resolve => resolve.json())
-            .then(result => {
-                console.log(result);
-                BookComponent = {
-                    template: `
+  <script>
+    // fetch('http://localhost:8080/HelloApp/bookListJson.do')
+    //     .then(resolve => resolve.json())
+    //     .then(result => console.log(result))
+    //     .catch(reject => console.log(reject))
+    let BookComponent = {
+      template: '<div></div>'
+    };
+    fetch('http://localhost:8080/HelloApp/bookListJson.do')
+      .then(resolve => resolve.json())
+      .then(result => {
+        console.log(result);
+        BookComponent = {
+          template: `
                     <div>
                         <ul>
                             <li v-for="book in books">{{book.bookCode}}</li>
                         </ul>
                     </div>
                     `,
-                    data: function () {
-                        return {
-                            books: result
-                        }
-                    }
-                }
+          data: function () {
+            return {
+              books: result
+            }
+          }
+        }
 
-            })
-            .catch(reject => console.log(reject))
+      })
+      .catch(reject => console.log(reject))
 
-        // const BookComponent = function (resolve, reject) {
-        //     setTimeout(function () {
-        //         resolve({
-        //             template: `
-        //             <div>
-        //                 <h1>
-        //                     비동기 컴포넌트
-        //                 </h1>
-        //             </div>
-        //             `
-        //         })
-        //     }, 1000)
-        // }
+    // const BookComponent = function (resolve, reject) {
+    //     setTimeout(function () {
+    //         resolve({
+    //             template: `
+    //             <div>
+    //                 <h1>
+    //                     비동기 컴포넌트
+    //                 </h1>
+    //             </div>
+    //             `
+    //         })
+    //     }, 1000)
+    // }
 
-        new Vue({
-            el: '.id',
-            data: {},
-            components: {
-                'book-component': BookComponent,
-            },
-            methods: {}
-        })
-    </script>
+    new Vue({
+      el: '.id',
+      data: {},
+      components: {
+        'book-component': BookComponent,
+      },
+      methods: {}
+    })
+  </script>
 </body>
 
 </html>
