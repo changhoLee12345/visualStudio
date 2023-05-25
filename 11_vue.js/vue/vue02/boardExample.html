@@ -120,9 +120,8 @@
                         //해당 글 조회수 증가
                         for (let i = 0; i < this.dataArray['board'].length; i++) {
                             if (this.dataArray['board'][i].no == info.no) {
-                                this.dataArray['board'][i].view = parseInt(this.dataArray['board'][
-                                    i
-                                ].view) + 1;
+                                this.dataArray['board'][i].view =
+                                    parseInt(this.dataArray['board'][i].view) + 1;
                             }
                         }
                     },
