@@ -31,6 +31,7 @@
                             console.log('onload')
                             console.log(e.target.result)
                             let json = JSON.parse(e.target.result);
+                            console.log(json)
                             vm.loadData = json
                         }
                         reader.readAsText(file);

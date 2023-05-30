@@ -91,8 +91,8 @@
                                 .then(response => response.json())
                                 .then(data => {
                                     this.dataArray = data;
-                                    if (this.dataArray != null && this.dataArray['board']
-                                        .length > 0) {
+                                    if (this.dataArray != null &&
+                                        this.dataArray['board'].length > 0) {
                                         this.listOk = true;
                                     }
                                 }).catch(err => console.log(err));
