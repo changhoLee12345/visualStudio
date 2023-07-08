@@ -8,7 +8,8 @@
 // } = 'family';
 // console.log(ryon);
 
-import modfnc from './module.js';
+import modfnc from './module/module.js';
+
 modfnc.setData([{
   name: 'hong',
   age: 20
@@ -16,6 +17,8 @@ modfnc.setData([{
   name: 'kim',
   age: 22
 }])
-console.log(modfnc.makeTable())
-document.getElementById('show').append(modfnc.makeTable());
+
+let result = modfnc.makeTable();
+console.log(result)
+document.getElementById('show').append(result);
 // console.log(modfnc);
