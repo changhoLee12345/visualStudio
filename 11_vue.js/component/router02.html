@@ -15,8 +15,8 @@
     <div id="app">
         <h1>Hello App</h1>
         <ul>
-            <li v-for="entry in article" v-bind:key="entry.no">
-                <router-link :to="'/board/' + entry.no">
+            <li v-for="entry in articles" v-bind:key="entry.no">
+                <router-link v-bind:to="'/board/' + entry.no">
                     Go To {{entry.title}}
                 </router-link>
             </li>
@@ -29,8 +29,10 @@
             template: `<div>vue {{no}}</div>`,
             computed: {
                 no: function () {
-                    return this.$route.params.no;
-                }
+                    let articles = this.$parent.articles;
+                    let result = articles.filter(article => article.no == this.$route.params.no)
+                    return result[0].content;
+                },
             }
         }
 
@@ -45,15 +47,18 @@
             el: '#app',
             router: router,
             data: {
-                article: [{
+                articles: [{
                     no: 1,
-                    title: 'Vue js'
+                    title: 'Vue js',
+                    content: 'Vue Js is good framework'
                 }, {
                     no: 2,
-                    title: 'react is'
+                    title: 'react is',
+                    content: 'React Js is good framework'
                 }, {
                     no: 3,
-                    title: 'javascript'
+                    title: 'javascript',
+                    content: 'Javascript Js is good framework'
                 }]
             }
         })

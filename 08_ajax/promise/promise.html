@@ -10,7 +10,26 @@
 
 <body>
     <script>
-
+        try {
+            fetch('data.json')
+                .then(function (resolve) {
+                    console.log('resolve: ', resolve);
+                    let data = resolve.json();
+                    return data;
+                })
+                .then(json => {
+                    console.log(json);
+                    return json;
+                })
+                .then(result => {
+                    console.log(result)
+                })
+                .catch(err => {
+                    console.log('err: ', err)
+                })
+        } catch (e) {
+            console.log('catch: ', e);
+        }
     </script>
 </body>
 
