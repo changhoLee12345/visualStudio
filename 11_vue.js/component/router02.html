@@ -25,7 +25,7 @@
     </div>
 
     <script>
-        const Comp = {
+        const Component = {
             template: `<div>vue {{no}}</div>`,
             computed: {
                 no: function () {
@@ -39,7 +39,7 @@
         const router = new VueRouter({
             routes: [{
                 path: '/board/:no',
-                component: Comp
+                component: Component
             }]
         })
 
