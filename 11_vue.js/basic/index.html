@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #list {
+            width: 400px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        #list td,
+        #list th {
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        #list>thead>tr {
+            color: yellow;
+            background-color: purple;
+        }
+    </style>
+    <script src="https://unpkg.com/vue@2"></script>
+</head>
+
+<body>
+
+    <div id="example">
+        <table id="list">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>전화번호</th>
+                    <th>주소</th>
+                </tr>
+            </thead>
+            <tbody id="contacts">
+                <tr v-for="contact in contacts">
+                    <td>{{contact.no}}</td>
+                    <td>{{contact.name}}</td>
+                    <td>{{contact.tel}}</td>
+                    <td>{{contact.address}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        var model = {
+            pageno: 1,
+            pagesize: 10,
+            totalcount: 100,
+            contacts: [{
+                    no: 100,
+                    name: '설현',
+                    tel: '010-1234-9999',
+                    address: '서울'
+                },
+                {
+                    no: 99,
+                    name: '혜리',
+                    tel: '010-1234-9998',
+                    address: '경기'
+                },
+                {
+                    no: 98,
+                    name: '하니',
+                    tel: '010-1234-9997',
+                    address: '제주'
+                },
+                {
+                    no: 97,
+                    name: '성소',
+                    tel: '010-1234-9996',
+                    address: '대전'
+                },
+                {
+                    no: 96,
+                    name: '지아',
+                    tel: '010-1234-9995',
+                    address: '인천'
+                }
+            ]
+        }
+        new Vue({
+            el: '#example',
+            data: model
+        })
+    </script>
+</body>
+
+</html>
