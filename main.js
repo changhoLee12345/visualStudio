@@ -10,15 +10,14 @@
 
 import modfnc from './module/module.js';
 
-modfnc.setData([{
+const data = [{
   name: 'hong',
   age: 20
 }, {
   name: 'kim',
   age: 22
-}])
+}];
 
-let result = modfnc.makeTable();
-console.log(result)
-document.getElementById('show').append(result);
+let table = new Table(data);
+document.getElementById('show').append(table);
 // console.log(modfnc);

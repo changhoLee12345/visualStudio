@@ -7,7 +7,13 @@ export default {
   setData(dataAry = []) {
     this.dataAry = dataAry;
   },
-  Table() {
+  Table(dataAry) {
+    if (dataAry) {
+      this.setData(dataAry);
+      this.table = document.createElement('table');
+      this.table.append(this.makeThead())
+      this.table.append(this.makeTbody())
+    }
     return this.table;
   },
   makeTable() {
