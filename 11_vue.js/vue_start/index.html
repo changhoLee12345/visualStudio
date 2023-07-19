@@ -6,42 +6,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        #list {
+            width: 400px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        #list td,
+        #list th {
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        #list>thead>tr {
+            color: yellow;
+            background-color: purple;
+        }
+
+        .divider {
+            height: 2px;
+            background-color: gray;
+        }
     </style>
     <script src="https://unpkg.com/vue@2"></script>
 </head>
 
+<template id="listTemplate">
+    <div>
+        <table id="list">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>전화번호</th>
+                    <th>주소</th>
+                </tr>
+            </thead>
+            <tbody id="contacts">
+                <tr v-for="contact in contacts">
+                    <td>{{contact.no}}</td>
+                    <td>{{contact.name}}</td>
+                    <td>{{contact.tel}}</td>
+                    <td>{{contact.address}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+
+<script type="text/javascript">
+    Vue.component('contact-list', {
+        template: '#listTemplate',
+        props: {
+            myMessage: {
+                type: String,
+                default: '안녕하세요'
+            },
+            count: {
+                type: Number,
+                required: true
+            },
+            countries: {
+                type: Array,
+                default: function () {
+                    return ['대한민국']
+                }
+            }
+        }
+    })
+</script>
+
 <body>
 
     <div id="app">
-        <hello-component v-bind:msg="message"></hello-component>
-        <hello-component></hello-component>
-        <hello-component></hello-component>
+        <h3>예방접종</h3>
+        <ul>
+            <contact-list></contact-list>
+
+        </ul>
     </div>
 
-
-    <template id="temp">
-        <h3>hell, world {{msg}}</h3>
-    </template>
-
-    <script type="text/x-template" id="comp">
-        <h3>Hello, World {{msg}}</h3>
-    </script>
-
     <script>
-        const HelloComponent = {
-            template: '#comp', //`<h3>Hello, World {{msg}}</h3>`,
-            props: ['msg']
-        }
-
-        Vue.component('hello-component', HelloComponent);
-
         new Vue({
-            el: '#app',
-            data: function () {
-                return {
-                    message: "hello"
-                }
-            }
+            el: '#app'
         })
     </script>
 

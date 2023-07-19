@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    </style>
+    <script src="https://unpkg.com/vue@2"></script>
+</head>
+
+<template id="listTemplate">
+    <li>{{myMessage}}</li>
+</template>
+
+<script type="text/javascript">
+    Vue.component('list-component', {
+        template: '#listTemplate',
+        props: {
+            myMessage: {
+                type: String,
+                default: '안녕하세요'
+            },
+            count: {
+                type: Number,
+                required: true
+            }
+        }
+    })
+</script>
+
+<body>
+
+    <div id="app">
+        <ul>
+            <list-component my-message="Hello" v-bind:count="100"></list-component>
+            <list-component my-message="씬짜오" v-bind:count="21"></list-component>
+            <list-component my-message="니하오"></list-component>
+            <list-component v-bind:count="1000"></list-component>
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app'
+        })
+    </script>
+
+</body>
+
+</html>
