@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    </style>
+    <script src="https://unpkg.com/vue@2"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <hello-component v-bind:msg="message"></hello-component>
+        <hello-component></hello-component>
+        <hello-component></hello-component>
+    </div>
+
+
+    <template id="temp">
+        <h3>hell, world {{msg}}</h3>
+    </template>
+
+    <script type="text/x-template" id="comp">
+        <h3>Hello, World {{msg}}</h3>
+    </script>
+
+    <script>
+        const HelloComponent = {
+            template: '#comp', //`<h3>Hello, World {{msg}}</h3>`,
+            props: ['msg']
+        }
+
+        Vue.component('hello-component', HelloComponent);
+
+        new Vue({
+            el: '#app',
+            data: function () {
+                return {
+                    message: "hello"
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>
