@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #list {
+            width: 400px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        #list td,
+        #list th {
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        #list>thead>tr {
+            color: yellow;
+            background-color: purple;
+        }
+
+        .divider {
+            height: 2px;
+            background-color: gray;
+        }
+    </style>
+    <script src="https://unpkg.com/vue@2"></script>
+</head>
+
+<template id="listTemplate">
+    <div>
+        <table id="list">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>전화번호</th>
+                    <th>주소</th>
+                </tr>
+            </thead>
+            <tbody id="contacts">
+                <tr v-for="contact in contacts">
+                    <td>{{contact.no}}</td>
+                    <td>{{contact.name}}</td>
+                    <td>{{contact.tel}}</td>
+                    <td>{{contact.address}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+
+<script type="text/javascript">
+    Vue.component('contact-list', {
+        template: '#listTemplate',
+        props: ['contacts']
+    })
+</script>
+
+<body>
+
+    <div id="app">
+        <h3>예방접종</h3>
+        <hr>
+        <h3>1차 예방</h3>
+        <contact-list v-bind:contacts="list1"></contact-list>
+        <h3>2차 예방</h3>
+        <contact-list v-bind:contacts="list2"></contact-list>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                list1: [{
+                        no: 97,
+                        name: 'Kalisa Rogers',
+                        tel: '010-1111',
+                        address: 'Seoul'
+                    },
+                    {
+                        no: 96,
+                        name: 'Jesse James',
+                        tel: '010-2222',
+                        address: 'Seoul'
+                    },
+                    {
+                        no: 95,
+                        name: 'Jennifer Waler',
+                        tel: '010-3333',
+                        address: 'Seoul'
+                    }
+                ],
+                list2: [{
+                        no: 94,
+                        name: 'Kalisa Rogers',
+                        tel: '010-1111',
+                        address: 'Seoul'
+                    },
+                    {
+                        no: 93,
+                        name: 'Jesse James',
+                        tel: '010-2222',
+                        address: 'Seoul'
+                    },
+                    {
+                        no: 92,
+                        name: 'Jennifer Waler',
+                        tel: '010-3333',
+                        address: 'Seoul'
+                    }
+                ]
+            }
+        })
+    </script>
+
+</body>
+
+</html>
