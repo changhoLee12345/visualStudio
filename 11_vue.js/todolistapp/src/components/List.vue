@@ -66,3 +66,68 @@
         </li>
     </ul>
 </template>
+
+<script type="text/javascript">
+    import eventBus from '../EventBus'
+
+    export default {
+        name: 'ListTodo',
+        created: function () {
+            eventBus.$on('add-todo', this.addTodo);
+        },
+        data: function () {
+            return {
+                todolist: [{
+                        id: 1,
+                        todo: '영화보기',
+                        done: false
+                    },
+                    {
+                        id: 2,
+                        todo: '주말산택',
+                        done: true
+                    },
+                    {
+                        id: 3,
+                        todo: 'ES6 공부',
+                        done: false
+                    },
+                    {
+                        id: 4,
+                        todo: '잠실야구장',
+                        done: false
+                    },
+                ]
+            }
+        },
+        methods: {
+            checked: function (done) {
+                if (done) return {
+                    checked: true
+                }
+                else {
+                    return {
+                        checked: false
+                    }
+                }
+            },
+            addTodo: function (todo) {
+                if (todo != '') {
+                    this.todolist.push({
+                        id: new Date().getTime(),
+                        todo: todo,
+                        done: false
+                    })
+                }
+            },
+            doneToggle: function (id) {
+                var index = this.todolist.findIndex((item) => item.id == id);
+                this.todolist[index].done = !this.todolist[index].done;
+            },
+            deleteTodo: function (id) {
+                var index = this.todolist.findIndex((item) => item.id == id);
+                this.todolist.splice(index, 1);
+            }
+        }
+    }
+</script>
