@@ -1,4 +1,13 @@
-import { createApp } from 'vue'
+import {
+    createApp,
+    Vue
+} from 'vue'
 import App from './App.vue'
+import TodoList from './components/TodoList.vue'
 
-createApp(App).mount('#app')
+Vue.config.productionTip = false;
+
+// createApp(App).mount('#app')
+new Vue({
+    render: h => h(TodoList)
+}).$mount('#app')
