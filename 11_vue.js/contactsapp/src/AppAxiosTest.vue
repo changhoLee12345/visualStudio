@@ -79,5 +79,24 @@
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
         color: #2c3e50;
+        margin-top: 60px;
+    }
+
+    .container {
+        border: solid 1px gray;
+        padding: 10px;
+        margin-bottom: 10px;
+        text-align: left;
+    }
+
+    #result {
+        text-align: left;
+        padding: 20px;
+        border: solid 1px black;
+    }
+
+    .form-group {
+        border: dashed 1px gray;
+        padding: 5px 5px 5px 20px;
     }
 </style>
