@@ -64,7 +64,7 @@
     </script>
 
     <div id="app3">
-        <p>{{ myNumber *.12345 }}</p>
+        <p>{{ myNumber * 2.12345 }}</p>
         <p>{{ myText + '를 배워보도록 합시다'}}</p>
         <p>{{ myBoolean }}</p>
         <p>{{ myArray }}</p>
@@ -73,8 +73,9 @@
         <p>{{ myObject.name }} {{ myObject.price }}</p>
         <p>{{ $data }}</p>
         <p>{{ new Date() }}</p>
+        <h3>{{func1()}}</h3>
+        <h3>{{test()}}</h3>
     </div>
-    <h1>func1()</h1>
     <script>
         function func1() {
             return '출력';
@@ -89,6 +90,14 @@
                 myObject: {
                     name: '홍차',
                     price: 600
+                },
+                func1: function () {
+                    return "test";
+                }
+            },
+            methods: {
+                test: function () {
+                    return 'test';
                 }
             }
         })
