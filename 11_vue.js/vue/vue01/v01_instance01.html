@@ -47,6 +47,8 @@
         })
     </script>
 
+    <hr>
+
     <div id="app2">
         <p>{{ myText }}</p>
         <!-- 디렉티브 : vue가 해당 요소에 실행할 명령어 (v- )-->
@@ -73,6 +75,7 @@
         <p>{{ myObject.name }} {{ myObject.price }}</p>
         <p>{{ $data }}</p>
         <p>{{ new Date() }}</p>
+        <p>{{ func1() }}</p>
     </div>
     <h1>func1()</h1>
     <script>
@@ -89,6 +92,9 @@
                 myObject: {
                     name: '홍차',
                     price: 600
+                },
+                func1: function(){
+                    return "hello, world"
                 }
             }
         })
