@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="show">
+        <table border="1">
+            <thead id="title"></thead>
+            <tbody id="list"></tbody>
+        </table>
+    </div>
+    <input type="file" name="member" id="member">
+
+    <script>
+        // FileReader 연습.
+        document.querySelector('#member').addEventListener('input', function (e) {
+            console.log(e);
+            let choseFile = e.target.files[0];
+
+            const reader = new FileReader();
+            reader.addEventListener('load', function () {
+                let data = reader.result;
+                let rows = data.split("\r\n");
+                rows.forEach((row, idx) => {
+                    if (idx == 0) {
+                        makeHeader(row);
+                    } else {
+                        makeBody(row);
+                    }
+                })
+            })
+            reader.readAsText(choseFile);
+        })
+
+        function makeHeader(row) {
+            document.querySelector('#title').append(makeRow(row));
+        }
+
+        function makeBody(row) {
+            document.querySelector('#list').append(makeRow(row));
+        }
+
+        function makeRow(row) {
+            let tr = document.createElement('tr');
+            let items = row.split(' ');
+            items.forEach(item => {
+                let td = document.createElement('td');
+                td.innerText = item;
+                tr.append(td);
+            })
+            return tr;
+        }
+
+        // JSON 연습.
+        var obj = {
+            name: "hong",
+            age: 20
+        }
+
+        function replacer(k, v) {
+            console.log('key=> ', this, ' val=> ', v);
+            if (typeof v == 'number') {
+                return v * 2;
+            } else if (typeof v == 'string') {
+                return v.toUpperCase();
+            }
+            return v;
+        }
+        var json = JSON.stringify(obj, replacer);
+        console.log('json==>', json);
+    </script>
+</body>
+
+</html>
