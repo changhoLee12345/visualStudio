@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <input type="text" v-model="mid">
+        <input type="text" v-model="mname">
+        <input type="text" v-model.number="mage">
+        <button @click="addMember">Add Member</button>
+
+        <hr>
+        <table v-bind:border="borderVal">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th><input type="checkbox"></th>
+                    <th>Del
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="mbr in members">
+                    <td>{{mbr.id}}</td>
+                    <td>{{mbr.name}}</td>
+                    <td>{{mbr.age}}</td>
+                    <td><input type="checkbox" v-bind:checked="mbr.chk"></td>
+                    <td><button @click="delMember(mbr.id)">Del</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app",
+            // template: `<div>{{msg}}</div>`,
+            data: {
+                msg: 'Hello, World',
+                mid: 'Kim',
+                mname: 'Kimkdo',
+                mage: '23',
+                members: [{
+                    id: 'Hong',
+                    name: 'Hongkildong',
+                    age: 20,
+                    chk: false
+                }, {
+                    id: 'Hwang',
+                    name: 'waongkildong',
+                    age: 22,
+                    chk: true
+                }],
+                myStyle: {
+                    border: '1px'
+                },
+                borderVal: '1px'
+            },
+            methods: {
+                addMember: function () {
+                    this.members.push({
+                        id: this.mid,
+                        name: this.mname,
+                        age: this.mage,
+                        chk: true
+                    })
+                    this.mid = '';
+                    this.mname = '';
+                    this.mage = '';
+                },
+                delMember: function (id) {
+                    this.members = this.members.filter(member => {
+                        console.log(id)
+                        console.log(member.id)
+                        return member.id != id;
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
