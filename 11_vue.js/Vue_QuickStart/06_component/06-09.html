@@ -5,34 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        #list {
-            width: 400px;
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-
-        #list td,
-        #list th {
-            border: 1px solid black;
-            text-align: center;
-        }
-
-        #list>thead>tr {
-            color: yellow;
-            background-color: purple;
-        }
-
-        .layout1 {
-            margin: 30px;
-        }
-    </style>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://unpkg.com/vue@2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.min.js"></script>
 
     <template id="timeTemplate">
         <div>
@@ -46,15 +19,12 @@
             template: '#timeTemplate',
             data: function () {
                 return {
-                    nowTS: 0
+                    nowTS: Date.now()
                 }
             },
             methods: {
                 timeClick() {
                     this.nowTS = (new Date()).getTime()
-                },
-                btnClick() {
-                    console.log('hhh')
                 }
             }
         })

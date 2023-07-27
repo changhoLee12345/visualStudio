@@ -157,6 +157,11 @@
                 getBoard: function (board) {
                     this.board = board;
                     this.showRead();
+                    for (let i = 0; i < this.boards.length; i++) {
+                        if (this.boards[i].no == board.no) {
+                            this.boards[i].view = this.boards[i].view + 1;
+                        }
+                    }
                 }
             }
         })

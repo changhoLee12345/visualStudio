@@ -38,16 +38,23 @@
         Vue.component('option-component', {
             template: '<option>hello</option>'
         })
-
-        Vue.component('select-option', {
-            template: '#selectTemplate'
-        })
     </script>
+
     <script type="text/x-template" id="selectTemplate">
+        <!-- <template id="selectTemplate"> -->
+        <!-- x-template 일 경우에는 정상적으로 랜더링 됨 하지만 template 으로 불가. -->
         <select>
             <option-component></option-component>
             <option-component></option-component>
         </select>
+        <!-- </template> -->
+    </script>
+
+
+    <script type="text/javascript">
+        Vue.component('select-option', {
+            template: '#selectTemplate'
+        })
     </script>
 
 </head>
@@ -56,9 +63,11 @@
 
     <div id="app">
         <select>
+            <!-- <option-component>를 사용할 수 없다.  select > option 의 순서가 되어야 한다. </option-component> -->
             <option is='option-component'></option>
             <option is='option-component'></option>
         </select>
+
         <select-option></select-option>
     </div>
 
