@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@2"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 게시글 목록 시작 -->
+        <div id="boardList" v-if="boardList">
+            <table border="1" id="list">
+                <thead>
+                    <tr>
+                        <th style="width:50px">글번호</th>
+                        <th>글제목</th>
+                        <th style="width:50px">조회수</th>
+                        <th style="width:50px">삭제</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="board in boards">
+                        <td>{{board.no}}</td>
+                        <td @click="getBoard(board)">{{board.title}}</td>
+                        <td>{{board.view}}</td>
+                        <td><button @click="boardDelete(board.no)">삭제</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button @click="showWrite">글쓰기</button>
+        </div>
+        <!-- 게시글 목록 종료 -->
+
+        <!-- 게시글 작성 시작 -->
+        <div id="boardWrite" v-if="boardWrite">
+            <table id="list">
+                <tbody>
+                    <tr>
+                        <td>글제목</td>
+                        <td><input type="text" style="width:90%" v-model="title"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <textarea cols="30" rows="3" style="width: 100%" v-model="content"></textarea>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button @click="showList">목록</button>
+            <button @click="saveBoard">저장</button>
+        </div>
+        <!-- 게시글 작성 종료 -->
+
+        <!-- 게시글 상세 시작 -->
+        <div id="boardRead" v-if="boardRead">
+            <table id="list">
+                <tr>
+                    <td style="width: 50px">글번호</td>
+                    <td>{{board.no}}</td>
+                    <td style="width: 50px">조회수</td>
+                    <td>{{board.view}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 50px">글제목</td>
+                    <td colspan="3">{{board.title}}</td>
+                </tr>
+                <tr style="height: 150px">
+                    <td colspan="4">{{board.title}}</td>
+                </tr>
+            </table>
+            <button @click="showList">목록</button>
+        </div>
+        <!-- 게시글 상세 종료 -->
+
+    </div>
+
+    <script>
+        var boardList = [{
+            no: 1,
+            title: '게실글1',
+            content: '글내용1',
+            view: 1
+        }, {
+            no: 2,
+            title: '게실글2',
+            content: '글내용2',
+            view: 1
+        }, {
+            no: 3,
+            title: '게실글3',
+            content: '글내용3',
+            view: 1
+        }]
+
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                boards: boardList,
+                title: '',
+                content: '',
+                board: {
+                    no: 0,
+                    title: '',
+                    content: '',
+                    view: 0
+                },
+                boardList: true,
+                boardWrite: false,
+                boardRead: false
+            },
+            methods: {
+                showWrite: function () {
+                    this.boardList = false;
+                    this.boardWrite = true;
+                    this.boardRead = false;
+                },
+                showList: function () {
+                    this.boardList = true;
+                    this.boardWrite = false;
+                    this.boardRead = false;
+                },
+                showRead: function () {
+                    this.boardList = false;
+                    this.boardWrite = false;
+                    this.boardRead = true;
+                },
+                saveBoard: function () {
+                    // 게실글의 no값중 제일큰값에 + 1을 사용.
+                    // 글번호, 제목, 내용, 조회수(0)
+                    let no = 1;
+                    if (this.boards.length != 0) {
+                        let idx = this.boards.length - 1;
+                        no = this.boards[idx].no + 1;
+                    }
+
+                    let title = this.title;
+                    let content = this.content;
+                    let view = 0;
+                    this.boards.push({
+                        no,
+                        title,
+                        content,
+                        view
+                    });
+
+                    this.title = '';
+                    this.content = '';
+                    this.showList();
+                },
+                boardDelete: function (no) {
+                    this.boards = this.boards.filter(board => board.no != no);
+                },
+                getBoard: function (board) {
+                    this.board = board;
+                    this.showRead();
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
