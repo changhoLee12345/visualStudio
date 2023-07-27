@@ -117,9 +117,10 @@
                     this.fetchContacts(name);
                 }
             },
-            fetchContacts: _.debounce(function (name) {
+            fetchContacts: function (name) {
+                // _.debounce(function (name) {
 
-                this.contactlist = [];
+                    this.contactlist = [];
                 this.isProcessing = true;
                 var url = 'http://sample.bmaster.kro.kr/contacts_long/search/' + name;
                 var vm = this;
@@ -137,8 +138,8 @@
                         vm.contactlist = [];
                         vm.isProcessing = false;
                     })
-
-            }, 300)
+                // }, 300)
+            }
         }
     })
 </script>

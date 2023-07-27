@@ -13,10 +13,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.min.js"></script>
 </head>
 
+<!-- 이벤트 버스 객체. -->
 <script type="text/javascript">
     var eventBus = new Vue();
 </script>
 
+<!-- 첫번째 자식 컴포넌트. -->
 <template id="child1Template">
     <div>
         <button v-on:click="clickEvent">child1 button</button>
@@ -76,7 +78,7 @@
 
     <script type="text/javascript">
         Vue.config.devtools = true;
-        new Vue({
+        var vm = new Vue({
             el: '#app',
         })
     </script>
