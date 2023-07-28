@@ -8,16 +8,9 @@
 // } = 'family';
 // console.log(ryon);
 
-import modfnc from './module/module.js';
+import myModule from './module/module.js';
+import svc from './module/boardService.js';
 
-const data = [{
-  name: 'hong',
-  age: 20
-}, {
-  name: 'kim',
-  age: 22
-}];
-
-let table = new Table(data);
-document.getElementById('show').append(table);
-// console.log(modfnc);
+svc.get('data.json', function (result) {
+  
+})
