@@ -30,15 +30,7 @@
                 props : 외부에서 들어오는 정보를 담을 프로퍼티(CRUD 가능)
             }
         */
-    </script>
 
-    
-    <div id="app">
-        <h3> 참여자 명단 </h3>
-        <p> 현재 참여자 수 : {{ count }} 명</p>
-        <input-component v-on:insert-user-info="counting"></input-component>
-    </div>
-    <script>
         const printComponent = {
             template: ` <div>
                             <p> 이름 : {{ name }}, 나이 : 만 {{ age - 1 }}, 소속 : {{ dept }} </p> 
@@ -113,7 +105,16 @@
                 'print-component': printComponent
             }
         }
+    </script>
 
+
+    <div id="app">
+        <h3> 참여자 명단 </h3>
+        <p> 현재 참여자 수 : {{ count }} 명</p>
+        <input-component v-on:insert-user-info="counting"></input-component>
+    </div>
+
+    <script>
         new Vue({
             el: '#app',
             data: {

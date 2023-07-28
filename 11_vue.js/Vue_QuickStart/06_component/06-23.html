@@ -13,6 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.min.js"></script>
 </head>
 
+<!-- contactlist-component 시작. -->
 <style>
     #list {
         width: 400px;
@@ -54,14 +55,15 @@
         </table>
     </div>
 </template>
-
 <script type="text/javascript">
     Vue.component('contactlist-component', {
         template: '#listTemplate',
         props: ['contacts'],
     })
 </script>
+<!-- contactlist-component 시작. -->
 
+<!-- search-component 시작. -->
 <template id="searchTemplate">
     <div>
         <p>
@@ -69,7 +71,6 @@
         </p>
     </div>
 </template>
-
 <script type="text/javascript">
     Vue.component('search-component', {
         template: '#searchTemplate',
@@ -91,7 +92,9 @@
         }
     })
 </script>
+<!-- search-component 시작. -->
 
+<!-- search-contact-component 시작. -->
 <template id="searchcontactTemplate">
     <div>
         <search-component placeholder="두 글자 이상 입력!!" v-on:search="searchEvent"></search-component>
@@ -120,7 +123,7 @@
             fetchContacts: function (name) {
                 // _.debounce(function (name) {
 
-                    this.contactlist = [];
+                this.contactlist = [];
                 this.isProcessing = true;
                 var url = 'http://sample.bmaster.kro.kr/contacts_long/search/' + name;
                 var vm = this;
@@ -143,6 +146,7 @@
         }
     })
 </script>
+<!-- search-contact-component 끝. -->
 
 <body>
 
