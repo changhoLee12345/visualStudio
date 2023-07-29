@@ -31,10 +31,10 @@ new Vue({
         boardInfo: {} // 선택된 게시글 정보
     },
     components: {
-        myHeader,
-        myBoardList,
-        myBoardRead,
-        myBoardWrite
+        'my-header': myHeader,
+        'my-board-list': myBoardList,
+        'my-board-read': myBoardRead,
+        'my-board-write': myBoardWrite
     },
     methods: {
         boardList: function () { // 게시판 목록 조회
