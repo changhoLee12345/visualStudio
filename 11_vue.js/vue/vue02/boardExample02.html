@@ -13,8 +13,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 </head>
 
-
-//myBoardList : 게시판 목록 조회
 <template id="boardListTemplate">
     <div>
         <table id="list">
@@ -55,33 +53,33 @@
 </script>
 
 
-//myBoardRead : 게시판 글 조회
-<template id="">
-
-</template>
-<script type="text/javascript">
-    const myBoardRead = {
-        template: `<div>
-    <table id="list">
-        <tr>
-            <td style="width:50px;">글제목</td>
-            <td>{{ object.title }}</td>
+<template id="boardReadTemplate">
+    <div>
+        <table id="list">
+            <tr>
+                <td style="width:50px;">글제목</td>
+                <td>{{ object.title }}</td>
             </tr>
             <tr style="height:300px;">
                 <td colspan="2">{{ object.content }}</td>
-                </tr>
-                </table>
-                <button style="float:right;" v-on:click="boardList">목록</button>
-                </div>`,
+            </tr>
+        </table>
+        <button style="float:right;" v-on:click="boardList">목록</button>
+    </div>
+</template>
+<script type="text/javascript">
+    Vue.component('board-read', {
+        template: `#boardReadTemplate`,
         props: ['object'],
         methods: {
             boardList: function () {
                 this.$emit('board-list');
             }
         }
-    }
+    })
 </script>
-<template>
+
+<template id="boardWriteTemplate">
     <div>
         <table id="list">
             <tr>
@@ -100,8 +98,8 @@
 </template>
 <script type="text/javascript">
     //myBoardWrite : 게시판 글쓰기
-    const myBoardWrite = {
-        template: ``,
+    Vue.component('board-write', {
+        template: `#boardWriteTemplate`,
         data: function () {
             return {
                 title: '',
@@ -116,7 +114,7 @@
                 this.$emit('board-save', this.title, this.content);
             }
         }
-    }
+    })
 </script>
 
 
@@ -127,10 +125,10 @@
         <p>게시판 데이터 json 파일 읽기</p>
         <input type="file" v-on:change="loadData($event)">
         <button v-on:click="saveBoardList">게시판 저장하기</button>
-        <my-board-list v-if="listOk" v-bind:object="dataArray['board']" v-on:board-read="boardRead"
-            v-on:board-write="boardWrite" v-on:board-delete="boardDelete"></my-board-list>
-        <my-board-read v-if="readOk" v-bind:object="boardInfo" v-on:board-list="boardList"></my-board-read>
-        <my-board-write v-if="writeOk" v-on:board-list="boardList" v-on:board-save="boardSave"></my-board-write>
+        <board-list v-if="listOk" v-bind:object="dataArray['board']" v-on:board-read="boardRead"
+            v-on:board-write="boardWrite" v-on:board-delete="boardDelete"></board-list>
+        <board-read v-if="readOk" v-bind:object="boardInfo" v-on:board-list="boardList"></board-read>
+        <board-write v-if="writeOk" v-on:board-list="boardList" v-on:board-save="boardSave"></board-write>
     </div>
 
     <script>
@@ -143,11 +141,6 @@
                 writeOk: false,
                 dataArray: {}, // 파일에서 읽은 데이터
                 boardInfo: {} // 선택된 게시글 정보
-            },
-            components: {
-                'my-board-list': myBoardList,
-                'my-board-read': myBoardRead,
-                'my-board-write': myBoardWrite
             },
             methods: {
                 loadData: function (event) { // 파일을 읽어들이는 메소드
@@ -169,6 +162,7 @@
                         fetch(file)
                             .then(response => response.json())
                             .then(data => {
+                                console.log('data==> ', data)
                                 this.dataArray = data;
                                 if (this.dataArray != null &&
                                     this.dataArray['board'].length > 0) {
