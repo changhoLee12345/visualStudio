@@ -20,7 +20,7 @@ export default new VueRouter({
         },
         //boardRead
         {
-            path: '/boardRead/:item',
+            path: '/boardRead/:title',
             name: 'boardRead',
             component: myBoardRead,
             props: true

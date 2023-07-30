@@ -71,10 +71,10 @@ new Vue({
             }
 
             let boardInfo = {
-                'no': no,
-                'title': title,
-                'content': content,
-                'view': '1'
+                no,
+                title,
+                content,
+                view: 1
             }
 
             this.dataArray['board'].push(boardInfo);
