@@ -12,5 +12,7 @@ import myModule from './module/module.js';
 import svc from './module/boardService.js';
 
 svc.get('data.json', function (result) {
-  
+    console.log(result);
+    let tag = myModule.Table(result);
+    document.getElementById('show').append(tag)
 })
