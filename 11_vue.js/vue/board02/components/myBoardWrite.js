@@ -41,6 +41,7 @@ export default {
 
             this.$parent.setParentData(dataList);
 
+            // event를 통해 라우터링크 처리.
             this.$router.push({
                 name: 'boardList'
             });

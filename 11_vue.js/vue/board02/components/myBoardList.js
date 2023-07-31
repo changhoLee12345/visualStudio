@@ -1,3 +1,5 @@
+import eventBus from './eventBus.js';
+
 export default {
     template: ` <div>
                     <table id="list">
@@ -28,6 +30,7 @@ export default {
         }
     },
     created: function () {
+        eventBus.$on('add-count', this.addCount);
         this.object = this.$parent.getParentData();
     },
     methods: {
@@ -38,6 +41,14 @@ export default {
                 }
             }
             this.$parent.setParentData(this.object);
+        },
+        addCount: function (no, view) {
+            //해당 글 조회수 증가
+            for (let i = 0; i < this.object.length; i++) {
+                if (this.object[i].no == no) {
+                    this.object[i].view = parseInt(view) + 1;
+                }
+            }
         }
     }
 }

@@ -1,3 +1,5 @@
+import eventBus from './eventBus.js';
+
 export default {
     template: ` <div>
                     <table id="list">
@@ -28,14 +30,17 @@ export default {
         }
     },
     created: function () {
-        console.log('sss')
-        // this.object = this.$parent.getParentData();
-        fetch('./src/assets/data.json')
-        .then(response => response.json())
-        .then(json => {
-            console.log(json);
-            this.object = json;
-        })
+        
+        if (this.object.length == 0) {
+            // this.object = this.$parent.getParentData();
+            fetch('VueProject/assets/data.json')
+            .then(response => response.json())
+            .then(json => {
+                console.log('created...', json);
+                this.object = json;
+            })
+        }
+        eventBus.$on('add-count', this.addCount);
     },
     methods: {
         boardDelete: function (no) {
@@ -45,6 +50,14 @@ export default {
                 }
             }
             this.$parent.setParentData(this.object);
+        },
+        addCount: function (no) {
+            //해당 글 조회수 증가
+            for (let i = 0; i < this.object.length; i++) {
+                if (this.object[i].no == no) {
+                    this.object[i].view = parseInt(this.object[i].view) + 1;
+                }
+            }
         }
     }
 }

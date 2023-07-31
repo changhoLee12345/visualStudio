@@ -1,3 +1,5 @@
+import eventBus from './eventBus.js';
+
 export default {
     template: `<div>
                     <table id="list">
@@ -13,5 +15,12 @@ export default {
                                  style="float:right;"
                                  v-bind:to="{ name : 'boardList' }">목록</router-link>
                 </div>`,
-    props: ['item']
+    props: ['item'],
+    methods: {
+
+    },
+    created: function () {
+        eventBus.$emit('add-count', this.item.no);
+        console.log('item', this.item)
+    }
 }
