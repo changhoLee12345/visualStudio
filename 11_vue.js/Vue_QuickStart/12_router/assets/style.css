@@ -56,3 +56,13 @@ a:visited {
     text-decoration: none;
     display: inline-block;
 }
+
+.divider {
+    height: 3px;
+    ;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #ff0066;
+    color: #ff0066;
+    border: 0 none;
+}

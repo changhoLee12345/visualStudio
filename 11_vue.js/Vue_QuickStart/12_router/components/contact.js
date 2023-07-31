@@ -8,6 +8,7 @@ const template = `
       <router-link v-bind:to="'/contact/'+c.no">{{c.name}}</router-link>
     </div>
   </div>
+  <router-view></router-view>
 </div>
 `;
 

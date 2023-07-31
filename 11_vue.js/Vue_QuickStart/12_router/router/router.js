@@ -18,11 +18,15 @@ const router = new VueRouter({
     },
     {
       path: '/contact',
-      component: Contact
-    },
-    {
-      path: '/contact/:no',
-      component: ContactByNo
+      component: Contact,
+      children: [{
+        path: ':no',
+        component: ContactByNo
+      }]
+      // },
+      // {
+      //   path: '/contact/:no',
+      //   component: ContactByNo
     }
   ]
 })
