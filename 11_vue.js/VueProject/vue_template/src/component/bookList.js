@@ -30,7 +30,7 @@ export default {
     created: function () {
         console.log('sss')
         // this.object = this.$parent.getParentData();
-        fetch('../assets/data.json')
+        fetch('./src/assets/data.json')
         .then(response => response.json())
         .then(json => {
             console.log(json);
