@@ -28,7 +28,14 @@ export default {
         }
     },
     created: function () {
-        this.object = this.$parent.getParentData();
+        console.log('sss')
+        // this.object = this.$parent.getParentData();
+        fetch('../assets/data.json')
+        .then(response => response.json())
+        .then(json => {
+            console.log(json);
+            this.object = json;
+        })
     },
     methods: {
         boardDelete: function (no) {

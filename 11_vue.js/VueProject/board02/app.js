@@ -7,7 +7,7 @@ let template = `
     <router-view></router-view>
 </div>`
 
-var vm = new Vue({
+new Vue({
     el: '#app',
     template: template,
     data: {
@@ -16,14 +16,13 @@ var vm = new Vue({
     components: {
         myHeader // myHeader : myHeader -> 'my-header' : myHeader
     },
-    // methods: {
-    //     getParentData: function () {
-    //         return this.dataArray['board'];
-    //     },
-    //     setParentData: function (dataList) {
-    //         this.dataArray['board'] = dataList;
-    //     }
-    // },
+    methods: {
+        getParentData: function () {
+            return this.dataArray['board'];
+        },
+        setParentData: function (dataList) {
+            this.dataArray['board'] = dataList;
+        }
+    },
     router // router : router
 })
-// console.log('this.$data== ', vm.$data)

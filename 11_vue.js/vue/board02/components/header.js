@@ -11,7 +11,7 @@ export default {
         loadData: function (event) { // 파일을 읽어들이는 메소드
             let file = event.target.files[0].name;
             console.log(file);
-            let url = 'vue/board02/data/' + file;
+            let url = './board02/data/' + file;
             if (file) {
                 fetch(url)
                     .then(response => response.json())

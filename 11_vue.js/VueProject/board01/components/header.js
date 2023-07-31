@@ -14,7 +14,6 @@ export default {
                 fetch('data/' + file)
                     .then(response => response.json())
                     .then(data => {
-                        console.log(this.parentData)
                         this.parentData.dataArray = data;
                         if (this.parentData.dataArray != null && this.parentData.dataArray['board'].length > 0) {
                             this.parentData.listOk = true;

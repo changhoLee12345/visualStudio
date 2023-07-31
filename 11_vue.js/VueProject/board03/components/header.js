@@ -11,15 +11,18 @@ export default {
         loadData: function (event) { // 파일을 읽어들이는 메소드
             let file = event.target.files[0].name;
             if (file) {
-                fetch('data/' + file)
+                fetch('/board02/data/' + file)
                     .then(response => response.json())
                     .then(data => {
-                        console.log(this.parentData)
                         this.parentData.dataArray = data;
                         if (this.parentData.dataArray != null && this.parentData.dataArray['board'].length > 0) {
                             this.parentData.listOk = true;
                         }
                         this.$emit('update:parentData', this.parentData);
+
+                        this.$router.push({
+                            name: 'boardList'
+                        });
 
                     }).catch(err => console.log(err));
             }

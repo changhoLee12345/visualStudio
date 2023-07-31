@@ -7,20 +7,20 @@ import myBoardRead from './components/myBoardRead.js'
 let template = `
 <div>
     <my-header v-bind:parentData.sync="this.$data"></my-header>
-    <my-board-list v-if="listOk"
+    <my-board-list v-if="listOk" 
                     v-bind:object="dataArray['board']"
                     v-on:board-read="boardRead"
                     v-on:board-write="boardWrite"
                     v-on:board-delete="boardDelete"></my-board-list>
-    <my-board-read v-if="readOk"
+    <my-board-read v-if="readOk" 
                     v-bind:object="boardInfo"
                     v-on:board-list="boardList"></my-board-read>
-    <my-board-write v-if="writeOk"
-                    v-on:board-list="boardList"
+    <my-board-write v-if="writeOk" 
+                    v-on:board-list="boardList" 
                     v-on:board-save="boardSave"></my-board-write>
 </div>`
 
-var vm = new Vue({
+new Vue({
     el: '#app',
     template: template,
     data: {
@@ -31,10 +31,10 @@ var vm = new Vue({
         boardInfo: {} // 선택된 게시글 정보
     },
     components: {
-        myHeader,
-        myBoardList,
-        myBoardRead,
-        myBoardWrite
+        'my-header': myHeader,
+        'my-board-list': myBoardList,
+        'my-board-read': myBoardRead,
+        'my-board-write': myBoardWrite
     },
     methods: {
         boardList: function () { // 게시판 목록 조회
@@ -71,10 +71,10 @@ var vm = new Vue({
             }
 
             let boardInfo = {
-                no,
-                title,
-                content,
-                view: 1
+                'no': no,
+                'title': title,
+                'content': content,
+                'view': '1'
             }
 
             this.dataArray['board'].push(boardInfo);

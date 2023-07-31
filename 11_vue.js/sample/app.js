@@ -20,23 +20,7 @@ new Vue({
     },
     router,
     data: {
-        itemList: [{
-            id: 1,
-            title: 'aaa',
-            attr: false
-        }, {
-            id: 2,
-            title: 'bbb',
-            attr: true
-        }, {
-            id: 3,
-            title: 'ccc',
-            attr: false
-        }, {
-            id: 4,
-            title: 'ddd',
-            attr: false
-        }]
+        itemList: []
     },
     methods: {
         addItem: function (title) {
@@ -67,5 +51,13 @@ new Vue({
                 }
             })
         },
+    },
+    created: function () {
+        fetch('data.json')
+            .then(response => response.json())
+            .then(json => {
+                this.itemList = json;
+            })
+            .catch(err => console.log)
     }
 })

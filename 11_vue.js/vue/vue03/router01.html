@@ -56,11 +56,10 @@
 
 
     <div id="app2">
-        <router-link tag="button" v-bind:to="{ name : 'user', params : { username : 'erina' }}">
-            <!--<router-link tag="button" to="/users/erina">-->
-            User
-        </router-link>
-        <router-view></router-view>
+        <router-link tag="button" v-bind:to="{ name : 'user', params : { username : 'erina' }}">User</router-link>
+            <router-link tag="button" to="/goods" @click="changeURL('goods')">Goods</router-link>
+            <!-- <router-link tag="button" to="/users/erina"> User </router-link> -->
+            <router-view></router-view>
     </div>
 
     <script>
@@ -78,6 +77,14 @@
                     props: ['username']
                 },
                 props: true
+            }, {
+                path: '/goods',
+                name: 'goods',
+                component: {
+                    template: `<div>
+                                 <h3>Goods</h3>
+                               </div>`
+                }
             }]
         })
 
@@ -86,16 +93,20 @@
             router: vueRouter,
             methods: {
                 changeURL: function (url) {
-                    if (url) {
-                        this.$route.push({
-                            name: 'user',
-                            params: {
-                                username: 'erina'
-                            }
-                        })
-                    } else {
-                        this.$route.push();
-                    }
+                    console.log(url)
+                    // if (url) {
+                    //     this.$route.push({
+                    //         name: 'goods'
+                    //     })
+                        // this.$route.push({
+                        //     name: 'user',
+                        //     params: {
+                        //         username: 'erina'
+                        //     }
+                        // })
+                    // } else {
+                    //     this.$route.push();
+                    // }
                 }
             }
         })
