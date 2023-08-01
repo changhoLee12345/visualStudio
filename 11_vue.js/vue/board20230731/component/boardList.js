@@ -33,7 +33,7 @@ export default {
         
         if (this.object.length == 0) {
             // this.object = this.$parent.getParentData();
-            fetch('VueProject/assets/data.json')
+            fetch('vue/board20230731/assets/data.json')
             .then(response => response.json())
             .then(json => {
                 console.log('created...', json);
