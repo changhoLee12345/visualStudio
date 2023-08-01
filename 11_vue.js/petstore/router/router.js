@@ -4,7 +4,7 @@ import Product from '../components/product.js'
 import EditProduct from '../components/editProduct.js'
 
 export default new VueRouter({
-    mode: 'history',
+    // mode: 'history',
     routes: [{
         path: '/',
         name: 'iMain',

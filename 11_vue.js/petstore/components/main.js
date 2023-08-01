@@ -117,10 +117,11 @@ export default {
         }
     },
     created: function () {
-        axios.get('petstore/static/products.json').then(response => {
-            this.products = response.data.products;
-            console.log(this.products);
-        });
+        axios.get('/petstore/static/products.json')
+            .then(response => {
+                this.products = response.data.products;
+                console.log(this.products);
+            });
     }
 
 }
