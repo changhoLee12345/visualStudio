@@ -1,4 +1,11 @@
-[
-    {"id":"hong","age":20},
-    {"id":"hwnag","age":30}
+[{
+        "id": "hong",
+        "age": 20,
+        "done": false
+    },
+    {
+        "id": "hwnag",
+        "age": 30,
+        "done": true
+    }
 ]
