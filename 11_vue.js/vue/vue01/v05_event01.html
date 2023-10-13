@@ -23,7 +23,6 @@
         <p>{{ count }}</p>
         <button v-on:click="countUp">1씩 증가</button>
         <button v-on:click="oneClick" v-bind:disabled="isClick">One Clcik</button>
-        <hr>
         <label>증가 숫자 : <input v-model.number="myNum" type="number"></label>
         <button v-on:click="countUp2(myNum)">{{myNum}}씩 증가</button>
     </div>
@@ -49,6 +48,7 @@
             }
         })
     </script>
+    <hr>
 
     <a id="btn" href="https://www.naver.com" v-on:click="warn('Form cannot be submitted yet', $event)"> Submit </a>
     <script>
@@ -73,7 +73,7 @@
         <form action="http://www.naver.com" :class="style" @click="printMessage('form 태그 선택')" v-on:submit.prevent>
             <div v-bind:class="style" v-on:click.stop="printMessage('div 태그 선택')">
                 <p v-bind:class="style" @click.self.once="printMessage('p 태그 선택')">
-                    <a v-bind:class="style" href="http:www.google.com" v-on:click.prevent="printMessage('a 태그 선택')">
+                    <a v-bind:class="style" href="http:www.google.com" v-on:click.prevent.stop="printMessage('a 태그 선택')">
                         구글
                     </a>
                     {{ message }}

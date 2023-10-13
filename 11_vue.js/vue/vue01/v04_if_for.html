@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.13/dist/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.7.13/dist/vue.js"></script> -->
+    <script src="https://unpkg.com/vue@2"></script>
 </head>
 
 <body>
@@ -27,10 +28,11 @@
             el: '#app',
             data: {
                 myArray: [1, 2, 3, 4, 5, 6],
-                originalData: [1, 2, 3, 4, 5, 6]
+                originalData: [] // [1, 2, 3, 4, 5, 6]
             },
             methods: {
                 event1: function () {
+                    console.log('event1')
                     this.myArray = this.originalData.filter(function (value) {
                         return value % 2 == 0;
                     });
@@ -39,11 +41,15 @@
                     // this.myArray = this.originalData.filter(function (value) {
                     //     return value % 2 != 0;
                     // });
+                    console.log('event2')
                     for (let i = 0; i < this.originalData.length; i++) {
                         if (this.originalData[i] % 2 == 1)
                             this.myArray.push(this.originalData[i])
                     }
                 }
+            },
+            created: function () {
+                this.originalData = this.myArray;
             }
         })
     </script>
