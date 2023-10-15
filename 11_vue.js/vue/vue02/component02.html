@@ -20,17 +20,17 @@
         4-1) 문자를 제외한 자바스크립트 사용하는 타입을 값으로 넘기고 싶을 경우에는 v-bind 디렉티브 연결
     -->
   <div id="app">
-    name:<input v-model="name">
+    name:<input v-model="name"><br>
     <!-- 컴포넌트 추가 예정-->
-    <name-component v-bind:today="200 + 15" v-bind:my-name="name"></name-component>
-    myName:<input v-model="array.myName">
-    <name-component v-bind="dataList"></name-component>
-    <name-component my-name="영희" v-bind:today="100"></name-component>
-    <name-component v-bind:my-name="12.5"></name-component>
+    comp0: <name-component v-bind:today="200 + 15" v-bind:my-name="name"></name-component>
+    myName:<input v-model="array.myName"><br>
+    comp1: <name-component v-bind="dataList"></name-component>
+    comp2: <name-component my-name="영희" v-bind:today="100"></name-component>
+    comp3: <name-component v-bind:today="200" v-bind:my-name="name"></name-component>
   </div>
 
   <script>
-    const component = {
+    const nameComponent = {
       template: `<p>{{ today + 1 }}, 나는 {{ myName }} 입니다.</p>`,
       /*
       props : ['today', 'myName'], // 외부에서 값을 받아오는 프로퍼티
@@ -44,7 +44,10 @@
       }
       */
       props: {
-        myName: String,
+        myName: {
+          type: String,
+          default: "KIM"
+        },
         today: {
           type: Number,
           default: -1
@@ -55,9 +58,9 @@
     new Vue({
       el: '#app',
       data: {
-        name: '',
+        name: 'Hong',
         array: {
-          myName: '',
+          myName: 'Hwang',
           today: 205
         }
       },
@@ -70,7 +73,7 @@
         }
       },
       components: {
-        'name-component': component
+        'name-component': nameComponent
       }
     })
   </script>
@@ -113,6 +116,7 @@
     })
   </script>
 
+  <hr>
   <div id="app3">
     <p>{{ counter }}</p>
     <button v-on:click="incrementCounter">카운터 증가</button>
