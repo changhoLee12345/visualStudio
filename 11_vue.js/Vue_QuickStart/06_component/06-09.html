@@ -9,7 +9,7 @@
 
     <template id="timeTemplate">
         <div>
-            <span>{{nowTS}}</span>
+            <span>{{currentTime}}</span>
             <button v-on:click="timeClick">현재시간</button>
         </div>
     </template>
@@ -19,12 +19,12 @@
             template: '#timeTemplate',
             data: function () {
                 return {
-                    nowTS: Date.now()
+                    currentTime: Date.now()
                 }
             },
             methods: {
                 timeClick() {
-                    this.nowTS = (new Date()).getTime()
+                    this.currentTime = (new Date()).getTime()
                 }
             }
         })
