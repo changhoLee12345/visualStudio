@@ -5,10 +5,12 @@ import formComponent from './components/form.js';
 const template = `
 <div>
   <header-component v-bind:cartItemCount="cartItemCount" 
-                    v-on:show-checkout="showCheckout" v-on:submit-form="submitForm">
+                    v-on:show-checkout="showCheckout">
   </header-component>
-  <main-component v-bind:showProduct="showProduct == true" v-on:add-cart="addToCart" v-bind:canAddToCart="canAddToCart"></main-component>
-  <form-component v-bind:showProduct="showProduct == false"></form-component>
+  <main-component v-bind:showProduct="showProduct" 
+                  v-on:add-cart="addToCart" v-bind:cartItemCount="cartItemCount">
+  </main-component>
+  <form-component v-bind:showProduct="!showProduct"></form-component>
 </div>
 `;
 
@@ -36,12 +38,5 @@ var webstore = new Vue({
     cartItemCount: function () {
       return this.cart.length || '';
     },
-    canAddToCart: function (availableInventory) {
-      if (availableInventory)
-        return availableInventory > this.cartItemCount;
-      else
-        return true;
-    },
-
   }
 });

@@ -6,7 +6,7 @@ const template = `
   </div>
   <div class="nav navbar-nav navbar-right cart">
     <button type="button" class="btn btn-default btn-lg" v-on:click="showCheckout">
-      <span class="glyphicon glyphicon-shopping-cart">{{headObj.cartItemCount}}</span>
+      <span class="glyphicon glyphicon-shopping-cart">{{cartItemCount}}</span>
       체크아웃
     </button>
   </div>
@@ -16,7 +16,7 @@ const template = `
 
 export default {
   template,
-  props: ['headObj'],
+  props: ['cartItemCount'],
   data: function () {
     return {
       sitename: "Vue.js 애완용품샵",
@@ -26,5 +26,8 @@ export default {
     showCheckout() {
       this.$emit('show-checkout')
     }
+  },
+  updated: function () {
+    console.log('cartItemCount: ', this.cartItemCount);
   }
 }

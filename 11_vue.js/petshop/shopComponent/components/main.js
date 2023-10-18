@@ -21,15 +21,7 @@ const template = `
 
 export default {
     template,
-    props: {
-        showProduct: {
-            type: Boolean
-        },
-        canAddToCart: {
-            type: Boolean,
-            default: true
-        }
-    },
+    props: ['showProduct', 'cartItemCount'],
     data: function () {
         return {
             product: {
@@ -48,11 +40,12 @@ export default {
             this.$emit('add-cart', this.product.id);
         }
     },
-    // computed: {
-    //     canAddToCart: function () {
-    //         this.$emit('can-cart', this.availableInventory)
-    //     }
-    // },
+    computed: {
+        canAddToCart: function () {
+            return this.product.availableInventory > this.cartItemCount;
+        },
+
+    },
     filters: {
         formatPrice(price) { //#B
             if (!parseInt(price)) {
