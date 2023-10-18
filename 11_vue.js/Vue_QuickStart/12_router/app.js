@@ -3,7 +3,7 @@ import router from './router/router.js';
 const template = `
 <div>
   <div class="header">
-    <h1 class="headerText">( 주)OpenSG</h1>
+    <h1 class="headerText">(주)OpenSSG</h1>
     <nav>
       <ul>
         <li><router-link to="/home">Home</router-link></li>

@@ -1,7 +1,7 @@
-import myHeader from './components/header.js'
-import myBoardList from './components/myBoardList.js'
-import myBoardWrite from './components/myBoardWrite.js'
-import myBoardRead from './components/myBoardRead.js'
+import myHeader from './components/header.js';
+import myBoardList from './components/myBoardList.js';
+import myBoardWrite from './components/myBoardWrite.js';
+import myBoardRead from './components/myBoardRead.js';
 
 
 let template = `

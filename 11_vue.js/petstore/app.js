@@ -1,7 +1,7 @@
 import router from './router/router.js'
 
 const template = `
-  <div id="app">
+  <div class="app">
     <router-view/>
   </div>
 `

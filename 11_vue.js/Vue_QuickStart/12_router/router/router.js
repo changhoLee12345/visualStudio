@@ -5,6 +5,7 @@ import ContactByNo from '../components/contactByNo.js';
 
 const router = new VueRouter({
   routes: [{
+      mode: 'history',
       path: '/',
       component: Home
     },
