@@ -1,11 +1,11 @@
 // variable.js
 
+let arrNames = ['ryon', 'apeach', 'con']
 let {
     ryon,
     apeach,
     con
-} = 'family';
-let arrNames = ['ryon', 'apeach', 'con']
+} = arrNames;
 // let {
 //     ryon,
 //     apeach,
@@ -13,4 +13,4 @@ let arrNames = ['ryon', 'apeach', 'con']
 // } = arrNames;
 
 
-console.log(ryon)
+console.log(ryon);
