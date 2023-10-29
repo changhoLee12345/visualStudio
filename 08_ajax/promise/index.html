@@ -10,10 +10,12 @@
 
 <body>
     <script>
+        // Promise 객체를 활용해서 비동기 처리 하기.
+        // Promise 객체는 매개값으로 성공하면 실행할 함수, 실패하면 실행할 함수.
         let promise = new Promise((resolve, reject) => {
             setTimeout(() => {
-                // resolve('solved')
-                reject('fail')
+                resolve('solved')
+                // reject('fail')
             }, 1000)
         });
 
@@ -24,7 +26,7 @@
             })
             .then((data2)=>{
                 console.log(data2);
-                console.log('end')
+                consolee.log('end')
             })
             .catch((err) => {
                 console.log('error => ', err);
