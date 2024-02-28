@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>link1</title>
+</head>
+
+<body>
+    <h3>link1</h3>
+    <a href="link2.html">link2</a>
+    <script>
+        history.pushState({
+            page: 'first'
+        }, 'link1 page', '');
+        console.log(history)
+        window.addEventListener('popstate', function () {
+            alert('popstate')
+            location.href = 'link2.html';
+        })
+    </script>
+</body>
+
+</html>
