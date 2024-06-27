@@ -10,59 +10,8 @@
 
 <body>
     <img src="" alt="">
-    <script>
-        const promise = new Promise(function (resolve, reject) {
-            const req = new XMLHttpRequest();
-            // req.open('get', './myLittleVader.jpg');
-            req.open('get', 'data.json');
-            req.send();
-            req.responseType = 'json'; //'blob';
-            req.onreadystatechange = function () {
-                console.log('change: ', req.status, req.readyState)
-            }
-            req.onload = function () {
-                console.log(req.status, req.readyState)
-                if (req.status == 200) {
-                    resolve(req.response);
-                } else {
-                    reject(new Error('error occurred' + req.status))
-                }
-            }
-            req.onerror = function () {
-                reject(new Error('cannot call'))
-            }
-        });
-
-        promise
-            .then(resolve => {
-                // let imgUrl = URL.createObjectURL(resolve);
-                // document.querySelector('img').setAttribute('src', imgUrl);
-                console.log(resolve);
-            })
-            .catch(reject => {
-                console.log(reject);
-            })
-
-        // Promise 객체를 활용해서 비동기 처리 하기.
-        // Promise 객체는 매개값으로 성공하면 실행할 함수, 실패하면 실행할 함수.
-
-        // let promise = new Promise((resolve, reject) => {
-        //     // resolve('solved');
-        //     reject('fail');
-        // });
-
-        // promise
-        //     .then((data1) => {
-        //         console.log('then: ', data1)
-        //         return 'ok!';
-        //     })
-        //     .then(data2 => {
-        //         console.log('then2: ', data2);
-        //     })
-        //     .catch((err) => {
-        //         console.log('catch => ', err);
-        //     })
-    </script>
+    <div id="show"></div>
+    <script src="js/promise.js"> </script>
 </body>
 
 </html>
